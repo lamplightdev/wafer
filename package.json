@@ -1,0 +1,117 @@
+{
+  "name": "@lamplightdev/wafer",
+  "version": "1.0.1",
+  "description": "Web Component Base Class",
+  "keywords": [
+    "webcomponents",
+    "web-components",
+    "web components"
+  ],
+  "type": "module",
+  "main": "./lib/wafer.cjs",
+  "module": "./lib/wafer.js",
+  "unpkg": "./dist/wafer.js",
+  "exports": {
+    ".": {
+      "import": "./lib/wafer.js",
+      "default": "./lib/wafer.cjs"
+    },
+    "./dom": {
+      "import": "./lib/dom.js",
+      "default": "./lib/dom.cjs"
+    },
+    "./dom.js": {
+      "import": "./lib/dom.js",
+      "default": "./lib/dom.cjs"
+    },
+    "./server": {
+      "import": "./lib/server/wafer.js",
+      "default": "./lib/server/wafer.cjs"
+    },
+    "./lib/server/wafer": {
+      "import": "./lib/server/wafer.js",
+      "default": "./lib/server/wafer.cjs"
+    },
+    "./lib/server/wafer.js": {
+      "import": "./lib/server/wafer.js",
+      "default": "./lib/server/wafer.cjs"
+    },
+    "./server/dom": {
+      "import": "./lib/server/dom.js",
+      "default": "./lib/server/dom.cjs"
+    },
+    "./lib/server/dom": {
+      "import": "./lib/server/dom.js",
+      "default": "./lib/server/dom.cjs"
+    },
+    "./lib/server/dom.js": {
+      "import": "./lib/server/dom.js",
+      "default": "./lib/server/dom.cjs"
+    },
+    "./server/element": {
+      "import": "./lib/server/element.js",
+      "default": "./lib/server/element.cjs"
+    },
+    "./lib/server/element": {
+      "import": "./lib/server/element.js",
+      "default": "./lib/server/element.cjs"
+    },
+    "./lib/server/element.js": {
+      "import": "./lib/server/element.js",
+      "default": "./lib/server/element.cjs"
+    }
+  },
+  "types": "./lib/wafer.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/**",
+    "lib/**"
+  ],
+  "scripts": {
+    "test": "wtr test/client --recursive --node-resolve",
+    "test:watch": "wtr test/client --recursive --node-resolve --watch",
+    "test:coverage": "wtr test/client --recursive --exclude test/configs.js --node-resolve --coverage",
+    "test:server": "mocha test/server --recursive --exclude test/configs.js",
+    "test:server:coverage": "c8 --reporter=html --reports-dir=coverage-server/ mocha test/server --recursive --exclude test/configs.js",
+    "dist": "rollup -c",
+    "tsc": "tsc",
+    "typedoc": "typedoc --theme ./typedoc-theme --listInvalidSymbolLinks --logLevel Verbose",
+    "lint": "eslint \"src/*.js\" \"src/server/*.js\"",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "format:eslint": "eslint \"src/*.js\" \"src/server/*.js\" --fix",
+    "format:prettier": "prettier \"src/*.js\" \"src/server/*.js\" --write",
+    "build": "npm run lint && npm run tsc && npm run test && npm run test:server && npm run dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lamplightdev/wafer.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lamplightdev/wafer/issues"
+  },
+  "homepage": "https://github.com/lamplightdev/wafer#readme",
+  "devDependencies": {
+    "@open-wc/testing": "^2.5.33",
+    "@web/test-runner": "^0.13.15",
+    "c8": "^7.7.3",
+    "chai": "^4.3.4",
+    "chai-dom": "^1.9.0",
+    "chai-html": "^2.0.1",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "mocha": "^9.0.2",
+    "prettier": "^2.3.2",
+    "rollup": "^2.53.2",
+    "rollup-plugin-filesize": "^9.1.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "sinon": "^11.1.1",
+    "sinon-chai": "^3.7.0",
+    "typedoc": "^0.21.4",
+    "typescript": "^4.3.x"
+  },
+  "dependencies": {
+    "node-html-parser": "^4.1.0"
+  }
+}

@@ -1,0 +1,227 @@
+<style>
+  @font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto; /* or block, swap, fallback, optional */
+  src: url("/fonts/AtkinsonHyperlegible-Regular.woff2") format("woff2");
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: bold;
+  font-weight: 700;
+  font-display: auto; /* or block, swap, fallback, optional */
+  src: url("/fonts/AtkinsonHyperlegible-Bold.woff2") format("woff2");
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+  .tsd-page-toolbar {
+    height: 125px;
+  }
+
+  .tsd-page-title {
+    padding-top: 150px;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  #wafer-header * {
+    box-sizing: border-box;
+  }
+
+  #wafer-header {
+    --color-text: hsla(0, 0%, 30%, 1);
+    --color-text-light: hsla(0, 0%, 50%, 1);
+    --color-fg: hsla(1, 87%, 47%, 1);
+    --color-fg-light: hsla(1, 92%, 85%, 1);
+    --color-fg-lighter: hsla(1, 92%, 98%, 1);
+    --color-bg: hsla(0, 0%, 100%, 1);
+    --color-bg-tint: hsla(0, 0%, 99%, 1);
+    --color-lowlight: hsla(0, 0%, 22%, 0.1);
+    --color-lowlowlight: hsla(0, 0%, 22%, 0.05);
+
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+
+    border-bottom: 1px solid var(--color-lowlight);
+    background-color: var(--color-bg);
+    margin-bottom: 1.3rem;
+  }
+
+  #wafer-header a {
+    color: var(--color-fg);
+  }
+
+  #wafer-header > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+  }
+
+  #wafer-header #header-logo {
+    border-top: 5px solid transparent;
+  }
+
+  #wafer-header #header-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  #wafer-header #header-logo img {
+    width: 2rem;
+    margin-right: 1rem;
+  }
+
+  #wafer-header nav {
+    flex-grow: 1;
+  }
+
+  #wafer-header nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  #wafer-header nav ul li {
+    display: flex;
+    align-items: center;
+  }
+
+  #wafer-header nav ul li a {
+    display: block;
+    width: 6rem;
+    text-align: center;
+    padding: 0.8rem 1.2rem;
+    text-decoration: none;
+    border-top: 5px solid var(--color-lowlight);
+  }
+
+  @media (max-width: 889px) {
+    #wafer-header nav ul li a {
+      width: auto;
+      padding: 0.8rem 0.5rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  #wafer-header nav ul li a:hover {
+    border-color: var(--color-fg-light);
+  }
+
+  #wafer-header nav ul li.current a {
+    background-color: var(--color-fg-lighter);
+    border-color: var(--color-fg);
+  }
+</style>
+
+<header>
+	<div class="tsd-page-toolbar">
+    <div id="wafer-header">
+      <div>
+        <div id="header-logo">
+          <a href="/">
+            <img src="/img/logo.svg" alt="">
+            Wafer
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li class="">
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/docs/010-overview/010-introduction/">Docs</a>
+            </li>
+            <li class="current">
+              <a href="/api">API</a>
+            </li>
+            <li>
+              <a href="https://github.com/lamplightdev/wafer">GitHub</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="{{relativeURL "
+					assets/js/search.json"}}" data-base="{{relativeURL " ./"}}">
+					<div class="field">
+						<label for="tsd-search-field"
+							class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+
+					<a href="{{relativeURL "index.html"}}" class="title">{{project.name}}</a>
+				</div>
+
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption"
+							data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All
+									</li>
+								</ul>
+							</div>
+
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget"
+								for="tsd-filter-inherited">Inherited</label>
+
+							{{#unless settings.excludeExternals}}
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget"
+								for="tsd-filter-externals">Externals</label>
+							{{/unless}}
+						</div>
+					</div>
+
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			{{#if model.parent}} {{! Don't show breadcrumbs on main project page, it is the root page. !}}
+			<ul class="tsd-breadcrumb">
+				{{#with model}}{{> breadcrumb}}{{/with}}
+			</ul>
+			{{/if}}
+			<h1>{{#compact}}
+				{{#ifCond model.kindString "!==" "Project" }}
+				{{model.kindString}}&nbsp;
+				{{/ifCond}}
+				{{model.name}}
+				{{#if model.typeParameters}}
+				&lt;
+				{{#each model.typeParameters}}
+				{{#if @index}},&nbsp;{{/if}}
+				{{name}}
+				{{/each}}
+				&gt;
+				{{/if}}
+				{{/compact}}</h1>
+		</div>
+	</div>
+</header>

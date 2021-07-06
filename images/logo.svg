@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="668px" height="509px" viewBox="0 0 668 509" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 2</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Group-2" transform="translate(9.000000, 9.000000)" stroke="#F7B2B2" stroke-width="19">
+            <line x1="0.5" y1="231.5" x2="483.5" y2="0.5" id="Line"></line>
+            <line x1="0.5" y1="231.5" x2="0.5" y2="409.5" id="Line-Copy-4"></line>
+            <line x1="649.5" y1="81.5" x2="649.5" y2="259.5" id="Line-Copy-7"></line>
+            <line x1="166.5" y1="312.5" x2="649.5" y2="81.5" id="Line-Copy"></line>
+            <line x1="166.5" y1="357.5" x2="649.5" y2="126.5" id="Line-Copy-11"></line>
+            <line x1="166.5" y1="401.5" x2="649.5" y2="170.5" id="Line-Copy-12"></line>
+            <line x1="166.5" y1="446.5" x2="649.5" y2="215.5" id="Line-Copy-13"></line>
+            <line x1="166.5" y1="490.5" x2="649.5" y2="259.5" id="Line-Copy-6"></line>
+            <line x1="0.5" y1="231.5" x2="166.5" y2="312.5" id="Line-Copy-2"></line>
+            <line x1="0.5" y1="276" x2="166.5" y2="357" id="Line-Copy-8"></line>
+            <line x1="0.5" y1="320.5" x2="166.5" y2="401.5" id="Line-Copy-9"></line>
+            <line x1="0.5" y1="365" x2="166.5" y2="446" id="Line-Copy-10"></line>
+            <line x1="0.5" y1="409.5" x2="166.5" y2="490.5" id="Line-Copy-5"></line>
+            <line x1="483.5" y1="0.5" x2="649.5" y2="81.5" id="Line-Copy-3"></line>
+        </g>
+    </g>
+</svg>
