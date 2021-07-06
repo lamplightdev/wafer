@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "lib"
+  },
+  "include": ["src/**/*.js"],
+  "exclude": ["node_modules"],
+  "typedocOptions": {
+    "entryPoints": [
+      "src/wafer.js",
+      "src/wafer-mixin.js",
+      "src/helpers.js",
+      "src/knobs.js",
+      "src/common.js",
+      "src/server/wafer.js",
+      "src/server/element.js",
+      "src/server/helpers.js"
+    ],
+    "excludeExternals": true,
+    "out": "../wafer-docs/api"
+  }
+}
