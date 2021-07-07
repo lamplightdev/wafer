@@ -1,8 +1,9 @@
 {
   "name": "@lamplightdev/wafer",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "description": "Web Component Base Class",
   "main": "lib/wafer.js",
+  "exports": "./lib/wafer.js",
   "type": "module",
   "files": [
     "dist/**",
