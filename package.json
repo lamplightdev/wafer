@@ -1,6 +1,6 @@
 {
   "name": "@lamplightdev/wafer",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "Web Component Base Class",
   "main": "lib/wafer.js",
   "type": "module",
