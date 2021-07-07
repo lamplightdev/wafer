@@ -3,3 +3,6 @@
 </p>
 
 # Wafer
+
+[![Node.js CI](https://github.com/lamplightdev/wafer/actions/workflows/node.js.yml/badge.svg)](https://github.com/lamplightdev/wafer/actions/workflows/node.js.yml)
+[![Node.js Package](https://github.com/lamplightdev/wafer/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/lamplightdev/wafer/actions/workflows/npm-publish.yml)
