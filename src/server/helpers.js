@@ -1,39 +1,22 @@
-import { HTMLServerElement, render } from "./element.js";
+/**
+ * Helpers for rendering in {@link WaferServer}
+ *
+ * @module HelpersServer
+ */
+
+import { ServerElement, render } from "./element.js";
 import { updateTargets } from "../common.js";
-
-/**
- * @typedef { import("./wafer").WaferServer } WaferServer
- * @typedef { import("node-html-parser").Node } ParserNode
- * @typedef { import("node-html-parser").HTMLElement } ParserHTMLElement
- * @typedef { import("../wafer-mixin").Target } Target
- */
-
-/**
- * @typedef ElOpts
- * @prop {'open' | 'closed' | false} [shadow]
- * @prop {string | ParserNode | ParserNode[] | null} [shadowContents]
- * @prop {ParserHTMLElement[]} [contents]
- * @prop {Object<string, any>} [attrs]
- * @prop {Target[]} [targets]
- */
-
-/**
- * @typedef CustomElOpts
- * @prop {ParserHTMLElement[]} [contents]
- * @prop {Object<string, any>} [attrs]
- * @prop {Object<string, any>} [props]
- */
 
 /**
  *
  * @param {Object} opts
- * @param {ParserHTMLElement} opts.container
+ * @param {import("node-html-parser").HTMLElement} opts.container
  * @param {any[]} opts.items
  * @param {string} opts.html
  * @param {((value: any, index: number) => string)} opts.keyFn
- * @param {Target[]} [opts.targets]
- * @param { ((el: HTMLServerElement, item?: any, index?: number) => void) | null} [opts.init]
- * @param {Object<string, {serverOnly?: boolean, def: new (...args: any[]) => WaferServer}>} [opts.registry]
+ * @param {import("../types").Target[]} [opts.targets]
+ * @param { ((el: ServerElement, item?: any, index?: number) => void) | null} [opts.init]
+ * @param {Object<string, {serverOnly?: boolean, def: new (...args: any[]) => import("./wafer").WaferServer}>} [opts.registry]
  * @returns
  */
 const repeat = async ({
@@ -50,9 +33,9 @@ const repeat = async ({
   for (const [index, item] of items.entries()) {
     const key = keyFn(item, index);
 
-    const el = /** @type {[HTMLServerElement]} */ (
+    const el = /** @type {[ServerElement]} */ (
       (await render(html, registry)).childNodes
-    ).filter((node) => node instanceof HTMLServerElement)[0];
+    ).filter((node) => node instanceof ServerElement)[0];
 
     if (init) {
       init(el, item, index);
@@ -73,9 +56,9 @@ const repeat = async ({
 
 /**
  *
- * @param {Element|WaferServer} el
+ * @param {Element|import("./wafer").WaferServer} el
  * @param {string} selector
- * @param {(el: Element|WaferServer) => void} func
+ * @param {(el: Element|import("./wafer").WaferServer) => void} func
  */
 const apply = (el, selector, func) => {
   const promises = [];

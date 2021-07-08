@@ -1,40 +1,8 @@
 /**
- * @typedef { import("./server/element").HTMLServerElement } HTMLServerElement
- */
-
-/**
- * @typedef Prop
- * @prop {StringConstructor | NumberConstructor | BooleanConstructor | ObjectConstructor | ArrayConstructor} type
- * @prop {any} [initial]
- * @prop {boolean} [reflect=false]
- * @prop {Target[]} [targets=[]]
- * @prop {string[]} [triggers=[]]
- */
-
-/**
- * @typedef Target
- * @prop {string | ((value: any) => string)} selector
- * @prop {string} [attribute]
- * @prop {string} [property]
- * @prop {boolean} [text=false]
- * @prop {DOMUpdateFn} [dom]
- * @prop {UseFn} [use]
- */
-
-/**
- * @callback DOMUpdateFn
- * @param {Element | HTMLServerElement} target
- * @param {any} value
- * @param {Element | HTMLServerElement} el
- * @returns {Promise<string | void> | void}
- */
-
-/**
- * @callback UseFn
- * @param {any} value
- * @param {HTMLElement | {}} el
- * @param {HTMLElement | {}} [targetEl]
- * @returns {any}
+ * Mixin providing common functionality for controlling prop/attr relationships
+ * and dynamic updates
+ *
+ * @module WaferMixin
  */
 
 /**
@@ -42,21 +10,21 @@
  * @param {T} superclass - The class to extend
  */
 
-export const Mixin = (superclass) =>
+export const WaferMixin = (superclass) =>
   class Wafer extends superclass {
     static get template() {
       return "";
     }
 
     /**
-     * @type Object<string, Prop>
+     * @type Object<string, import("./types").Prop>
      */
     static get props() {
       return {};
     }
 
     /**
-     * @type Object<string, Prop>
+     * @type Object<string, import("./types").Prop>
      */
     get props() {
       return /** @type {typeof Wafer} */ (this.constructor).props;
@@ -69,6 +37,11 @@ export const Mixin = (superclass) =>
     constructor(...args) {
       super(...args);
 
+      /**
+       * Indicates if element has been connected to DOM
+       * @protected
+       * @type {boolean}
+       */
       this._connected = false;
 
       this._propNames = Object.keys(this.props);
@@ -100,15 +73,6 @@ export const Mixin = (superclass) =>
      */
     _setter(name) {
       return (/** @type {any} */ value) => {
-        if (this._toUpdate.has(name)) {
-          if (this._toUpdate.get(name) === value) {
-            return;
-          }
-        } else if (this[name] === value) {
-          this._toUpdate.delete(name);
-          return;
-        }
-
         this._toUpdate.set(name, value);
         this._newChanges = true;
 
@@ -189,7 +153,7 @@ export const Mixin = (superclass) =>
               this.removeAttribute(name);
             } else {
               const valueString =
-                type === Object || type === Array
+                type !== Number && type !== String
                   ? JSON.stringify(value)
                   : value;
               this.setAttribute(name, valueString);
@@ -258,9 +222,9 @@ export const Mixin = (superclass) =>
             this._toUpdate.clear();
 
             if (changed.size > 0) {
-              const dontUpdate = (await this.changed(changed)) || [];
+              const doNotUpdate = (await this.changed(changed)) || [];
               for (const name of changed.keys()) {
-                if (dontUpdate.includes(name)) {
+                if (doNotUpdate.includes(name)) {
                   noUpdate[name] = true;
                 } else {
                   delete noUpdate[name];

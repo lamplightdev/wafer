@@ -1,31 +1,22 @@
-import { Mixin } from "../wafer-mixin.js";
-import { HTMLServerElement, render } from "./element.js";
+/**
+ * Server implementation of Wafer
+ *
+ * @module WaferServer
+ */
+
+import { WaferMixin } from "../wafer-mixin.js";
+import { ServerElement, render } from "./element.js";
 import { updateTargets } from "../common.js";
 import { apply } from "./helpers.js";
 
-/**
- * @typedef Opts
- * @prop {'open' | 'closed' | false} [shadow]
- * @prop {string} tagName
- * @prop {Object<string, string>} [attrs]
- */
-
-/**
- * @typedef {Object} Updates
- * @prop {{name: string, value: string}} [attribute]
- * @prop {{name: string, value: any}} [property]
- * @prop {string} [text]
- * @prop {string | void} [dom]
- */
-
-export class WaferServer extends Mixin(HTMLServerElement) {
+export class WaferServer extends WaferMixin(ServerElement) {
   static get observedAttributes() {
     return Object.keys(this.props);
   }
 
   /**
    *
-   * @param {Opts} opts
+   * @param {import("../types").ServerOpts} opts
    * @param {Object<string,{serverOnly?: boolean, def: new (...args: any[]) => WaferServer}>} registry
    */
   constructor({ shadow = "open", tagName, attrs = {} }, registry = {}) {
@@ -47,7 +38,7 @@ export class WaferServer extends Mixin(HTMLServerElement) {
     this._initials = {};
 
     /**
-     * @type {HTMLServerElement | null}
+     * @type {ServerElement | null}
      */
     this.shadowRoot = null;
   }
@@ -78,7 +69,7 @@ export class WaferServer extends Mixin(HTMLServerElement) {
   }
 
   attachShadow({ mode = "open" }) {
-    this.shadowRoot = new HTMLServerElement("template", {
+    this.shadowRoot = new ServerElement("template", {
       shadowroot: mode,
     });
     this.appendChild(this.shadowRoot);

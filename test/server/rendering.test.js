@@ -2,7 +2,7 @@ import { expect } from "../testing.js";
 import sinon from "sinon";
 
 import { WaferServer as Wafer } from "../../src/server/wafer.js";
-import { HTMLServerElement, render } from "../../src/server/element.js";
+import { ServerElement, render } from "../../src/server/element.js";
 
 describe("Wafer renders expected content", () => {
   it("renders in shadow DOM", async () => {
@@ -372,7 +372,7 @@ describe("Wafer renders expected content", () => {
             {
               selector: "$div",
               dom: (el, value) => {
-                const child = new HTMLServerElement("h1");
+                const child = new ServerElement("h1");
                 child.textContent = value;
                 el.innerHTML = "";
                 el.appendChild(child._element);
@@ -411,7 +411,7 @@ describe("Wafer renders expected content", () => {
             {
               selector: "div",
               dom: (el, value) => {
-                const child = new HTMLServerElement("h1");
+                const child = new ServerElement("h1");
                 child.textContent = value;
                 el.innerHTML = "";
                 el.appendChild(child._element);

@@ -1,13 +1,16 @@
 /**
- * @typedef { import("./server/element").HTMLServerElement } HTMLServerElement
- * @typedef { import("./wafer-mixin").Target } Target
+ * Common functionality shared between {@link WaferClient} and {@link WaferServer}
+ *
+ * @module Common
  */
 
 /**
  *
  * @param {function} apply
- * @param {Element|HTMLServerElement} el
- * @param {{value: any, targets: Target[]}} opts
+ * @param {Element|import("./server/element").ServerElement} el
+ * @param {Object} opts
+ * @param {any} opts.value
+ * @param {import("./types").Target[]} opts.targets
  *
  */
 const updateTargets = async (apply, el, { value, targets }) => {

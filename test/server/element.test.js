@@ -1,10 +1,10 @@
 import { expect } from "../testing.js";
 
-import { HTMLServerElement, render } from "../../src/server/element.js";
+import { ServerElement, render } from "../../src/server/element.js";
 
 describe("Wafer element", () => {
   it("can set content using innerHTML", async () => {
-    const el = new HTMLServerElement("div");
+    const el = new ServerElement("div");
 
     el.innerHTML = `<h1>Hi!!</h1><h2>Bye!!</h2>`;
 
@@ -20,7 +20,7 @@ describe("Wafer element", () => {
   });
 
   it("can get firstChild", async () => {
-    const el = new HTMLServerElement("div");
+    const el = new ServerElement("div");
 
     el.innerHTML = `<h1>Hi!!</h1><h2>Bye!!</h2>`;
 

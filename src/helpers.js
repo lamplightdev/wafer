@@ -1,7 +1,7 @@
 /**
- * @typedef { import("./wafer-mixin").Target } Target
- * @typedef { import("./wafer").TargetEvent } TargetEvent
- * @typedef { import("./wafer").TargetEvents } TargetEvents
+ * Helpers for rendering in {@link WaferClient}
+ *
+ * @module HelpersClient
  */
 
 import { updateTargets } from "./common.js";
@@ -64,9 +64,9 @@ const emit = (
  * @param {any[]} opts.items
  * @param {string} opts.html
  * @param {((value: any, index: number) => string)} opts.keyFn
- * @param {Target[]} [opts.targets]
+ * @param {import("./types").Target[]} [opts.targets]
  * @param { ((el: Element, item?: any, index?: number) => void) | null} [opts.init]
- * @param { Object<string, TargetEvents>} [opts.events]
+ * @param { Object<string, import("./types").TargetEvents>} [opts.events]
  *
  */
 const repeat = ({
@@ -116,16 +116,9 @@ const repeat = ({
     el.remove();
   }
 
-  /**
-   * @typedef ElInfo
-   * @prop {Element} el
-   * @prop {number} targetIndex
-   * @prop {number} distance
-   */
-
   // update and move those with greatest distance to travel first
   /**
-   * @type {ElInfo[]}
+   * @type {import("./types").ElInfo[]}
    */
   const distanceToTravel = [];
   const childrenKeys = [...container.children].map((child) =>
@@ -239,7 +232,7 @@ const apply = (el, selector, func) => {
  * @param {Element} el
  * @param {string} selector
  * @param {string} name
- * @param {((ev: Event) => any) | TargetEvent} def
+ * @param {((ev: Event) => any) | import("./types").TargetEvent} def
  */
 const bindEvent = (el, selector, name, def) => {
   /**

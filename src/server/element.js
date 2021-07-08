@@ -1,14 +1,14 @@
 /**
- * @typedef { import("node-html-parser").Node } Node
- * @typedef { import("node-html-parser").HTMLElement } HTMLElement
- * @typedef { import("./wafer").WaferServer } WaferServer
+ * Server implementation of {@link Element}
+ *
+ * @module ServerElement
  */
 
 import pkg from "node-html-parser";
 // @ts-ignore
 const { parse, HTMLElement } = pkg;
 
-class HTMLServerElement {
+class ServerElement {
   /**
    *
    * @param {string} tagName
@@ -71,7 +71,7 @@ class HTMLServerElement {
 
   /**
    *
-   * @param {HTMLServerElement} el
+   * @param {ServerElement} el
    * @returns
    */
   appendChild(el) {
@@ -150,8 +150,8 @@ class HTMLServerElement {
 /**
  *
  * @param {typeof HTMLElement} el
- * @param {Object<string, { serverOnly?: boolean, def: new (...args: any[]) => WaferServer}>} registry
- * @returns {Promise<HTMLServerElement>}
+ * @param {Object<string, { serverOnly?: boolean, def: new (...args: any[]) => import("./wafer").WaferServer}>} registry
+ * @returns {Promise<ServerElement>}
  */
 const convert = async (el, registry = {}) => {
   const children = [];
@@ -175,7 +175,7 @@ const convert = async (el, registry = {}) => {
     }
     await newEl.connectedCallback();
   } else {
-    newEl = new HTMLServerElement(tagName);
+    newEl = new ServerElement(tagName);
     newEl.setElement(el);
   }
 
@@ -185,12 +185,12 @@ const convert = async (el, registry = {}) => {
 /**
  *
  * @param {string} data
- * @param {Object<string, {serverOnly?: boolean, def: new (...args: any[]) => WaferServer}>} registry
- * @returns {Promise<HTMLServerElement>}
+ * @param {Object<string, {serverOnly?: boolean, def: new (...args: any[]) => import("./wafer").WaferServer}>} registry
+ * @returns {Promise<ServerElement>}
  */
 const render = async (data, registry = {}) => {
   const tree = parse(data);
   return convert(tree, registry);
 };
 
-export { HTMLServerElement, convert, render };
+export { ServerElement, convert, render };

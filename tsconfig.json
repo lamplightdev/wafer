@@ -16,6 +16,7 @@
   "exclude": ["node_modules"],
   "typedocOptions": {
     "entryPoints": [
+      "src/types.js",
       "src/wafer.js",
       "src/wafer-mixin.js",
       "src/helpers.js",

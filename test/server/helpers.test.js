@@ -3,7 +3,7 @@ import sinon from "sinon";
 
 import { WaferServer as Wafer } from "../../src/server/wafer.js";
 import { repeat } from "../../src/server/helpers.js";
-import { HTMLServerElement, render } from "../../src/server/element.js";
+import { ServerElement, render } from "../../src/server/element.js";
 
 describe("Wafer helpers", () => {
   it("can render elements in container with repeat", async () => {
@@ -287,7 +287,7 @@ describe("Wafer helpers", () => {
                     },
                   ],
                   init: async (el, item, index) => {
-                    const div = new HTMLServerElement("div");
+                    const div = new ServerElement("div");
                     div.textContent = `d${item} (${index})`;
                     el.appendChild(div);
                   },

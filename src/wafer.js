@@ -1,24 +1,14 @@
-import { Mixin } from "./wafer-mixin.js";
+/**
+ * Client implementation of Wafer
+ *
+ * @module WaferClient
+ */
+
+import { WaferMixin } from "./wafer-mixin.js";
 import { stamp, apply, bindEvent } from "./helpers.js";
 import { updateTargets } from "./common.js";
 
-/**
- * @typedef Opts
- * @prop {'open' | 'closed' | false} [shadow]
- */
-
-/**
- * @typedef TargetEvent
- * @prop {(this: Element, ev: Event) => any} fn
- * @prop {HTMLElement} [target]
- * @prop {boolean | AddEventListenerOptions | undefined} [opts]
- */
-
-/**
- * @typedef {Object<string, ((this: Element, ev: Event) => any) | TargetEvent>} TargetEvents
- */
-
-export class Wafer extends Mixin(HTMLElement) {
+class WaferClient extends WaferMixin(HTMLElement) {
   static get supportsDSD() {
     // eslint-disable-next-line no-prototype-builtins
     return HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot");
@@ -29,7 +19,7 @@ export class Wafer extends Mixin(HTMLElement) {
   }
 
   /**
-   * @type Object<string, TargetEvents>
+   * @type Object<string, import("./types").TargetEvents>
    */
   get events() {
     return {};
@@ -37,18 +27,19 @@ export class Wafer extends Mixin(HTMLElement) {
 
   /**
    *
-   * @param {Opts} opts
+   * @param {import("./types").ClientOpts} opts
    */
   constructor({ shadow = "open" } = {}) {
     super();
 
-    this._connected = false;
     this._serverContext = false;
 
     if (shadow) {
       if (!this.shadowRoot) {
         if (this.serverRendered()) {
-          if (!(/** @type {typeof Wafer} */ (this.constructor).supportsDSD)) {
+          if (
+            !(/** @type {typeof WaferClient} */ (this.constructor).supportsDSD)
+          ) {
             // DSD not supported
             const template = /** @type {HTMLTemplateElement} */ (
               this.querySelector("template[shadowroot]")
@@ -63,7 +54,7 @@ export class Wafer extends Mixin(HTMLElement) {
           }
         } else {
           this.attachShadow({ mode: shadow }).appendChild(
-            stamp(/** @type {typeof Wafer} */ (this.constructor).template)
+            stamp(/** @type {typeof WaferClient} */ (this.constructor).template)
           );
         }
       }
@@ -89,7 +80,7 @@ export class Wafer extends Mixin(HTMLElement) {
       if (!this.shadowRoot && !this.serverRendered()) {
         // Light DOM
         this.appendChild(
-          stamp(/** @type {typeof Wafer} */ (this.constructor).template)
+          stamp(/** @type {typeof WaferClient} */ (this.constructor).template)
         );
       }
 
@@ -140,3 +131,5 @@ export class Wafer extends Mixin(HTMLElement) {
     updateTargets(apply, this, { value, targets });
   }
 }
+
+export { WaferClient as Wafer };

@@ -1,6 +1,7 @@
 /**
- * @typedef { import("./wafer-mixin").UseFn } UseFn
- * @typedef { import("./wafer-mixin").DOMUpdateFn } DOMUpdateFn
+ * Component for inspecting {@link WaferClient} elements
+ *
+ * @module Knobs
  */
 
 import { Wafer } from "./wafer.js";
@@ -207,7 +208,7 @@ class Knobs extends Wafer {
             selector: "$h1 > div > span",
             /**
              *
-             * @type {UseFn}
+             * @type {import("./types").UseFn}
              */
             use: (val) => `[${val}]`,
             text: true,
@@ -233,7 +234,7 @@ class Knobs extends Wafer {
           {
             selector: "$#props .knobs, #attrs .knobs",
             /**
-             * @type {DOMUpdateFn}
+             * @type {import("./types").DOMUpdateFn}
              */
             dom: (el, props, self) => {
               const elWafer = /** @type {Wafer}  */ (el);
