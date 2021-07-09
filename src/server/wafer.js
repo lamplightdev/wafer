@@ -22,20 +22,16 @@ export class WaferServer extends WaferMixin(ServerElement) {
   constructor({ shadow = "open", tagName, attrs = {} }, registry = {}) {
     super(tagName, attrs);
 
+    super._serverContext = true;
+
     this._shadow = shadow;
     this._tagName = tagName;
     this._registry = registry;
 
-    this._serverContext = true;
     this._serverOnly =
       this._registry &&
       this._registry[tagName] &&
       this._registry[tagName].serverOnly;
-
-    /**
-     * @type Object<string,any>
-     */
-    this._initials = {};
 
     /**
      * @type {ServerElement | null}
@@ -114,7 +110,8 @@ export class WaferServer extends WaferMixin(ServerElement) {
     }
 
     await this.updateDone();
-    this._connected = true;
+
+    super._connected = true;
   }
 
   serverRendered() {

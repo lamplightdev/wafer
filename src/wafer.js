@@ -32,8 +32,6 @@ class WaferClient extends WaferMixin(HTMLElement) {
   constructor({ shadow = "open" } = {}) {
     super();
 
-    this._serverContext = false;
-
     if (shadow) {
       if (!this.shadowRoot) {
         if (this.serverRendered()) {
@@ -59,11 +57,6 @@ class WaferClient extends WaferMixin(HTMLElement) {
         }
       }
     }
-
-    /**
-     * @type Object<string,any>
-     */
-    this._initials = {};
 
     for (const name of this._propNames) {
       const { initial } = this.props[name];
@@ -113,7 +106,7 @@ class WaferClient extends WaferMixin(HTMLElement) {
       }
     }
 
-    this._connected = true;
+    super._connected = true;
   }
 
   serverRendered() {

@@ -1,29 +1,46 @@
 /**
- * Mixin providing common functionality for controlling prop/attr relationships
- * and dynamic updates
  *
  * @module WaferMixin
  */
 
 /**
+ *
+ * Mixin providing common functionality for controlling prop/attr relationships
+ * and dynamic updates
+ *
  * @template {new (...args: any[]) => any} T
  * @param {T} superclass - The class to extend
  */
 
 export const WaferMixin = (superclass) =>
   class Wafer extends superclass {
+    /**
+     * Static template string
+     *
+     * @protected
+     * @readonly
+     * @type {string}
+     */
     static get template() {
       return "";
     }
 
     /**
-     * @type Object<string, import("./types").Prop>
+     * Property definitions
+     *
+     * @protected
+     * @readonly
+     * @type {Object<string, import("./types").Prop>}
      */
     static get props() {
       return {};
     }
 
     /**
+     * Property definitions
+     *
+     * @protected
+     * @readonly
      * @type Object<string, import("./types").Prop>
      */
     get props() {
@@ -38,63 +55,124 @@ export const WaferMixin = (superclass) =>
       super(...args);
 
       /**
-       * Indicates if element has been connected to DOM
+       * Flag indicating if element has been connected to DOM
+       *
        * @protected
        * @type {boolean}
        */
       this._connected = false;
 
-      this._propNames = Object.keys(this.props);
       /**
-       * Prop values
-       * @type Object<string, any>
+       * Array of property names
+       *
+       * @protected
+       * @readonly
+       * @type {string[]}
+       */
+      this._propNames = Object.keys(this.props);
+
+      /**
+       * Current values of properties
+       *
+       * @protected
+       * @readonly
+       * @type {Object<string, any>}
        */
       this._props = {};
+
       /**
+       * Promise that will resolve when all the currently pending property
+       * changes have been processed
+       *
+       * @private
        * @type {Promise<void> | null}
        */
       this._changePromise = null;
+
       /**
+       * Promise that will resolve when all the current updates
+       * have been triggered
+       *
+       * @private
        * @type {Promise<void> | null}
        */
       this._updatePromise = null;
+
       /**
+       * Map of all properties to their values, that have changed in the current
+       * update cycle
+       *
+       * @private
+       * @readonly
        * @type {Map<String, any>}
        */
       this._toUpdate = new Map();
+
+      /**
+       * Flag indicating if this is the first update to occur
+       *
+       * @type {boolean}
+       */
       this._firstUpdate = true;
+
+      /**
+       * Flag indicating if there are any pending changes in the current update
+       * cycle
+       *
+       * @private
+       * @type {boolean}
+       */
       this._newChanges = false;
+
+      /**
+       * Flag indicating if this component is being constructed on the server
+       * @protected
+       * @type {boolean}
+       */
+      this._serverContext = false;
+
+      /**
+       * Initial values of properties
+       * @protected
+       * @type {Object<string,any>}
+       */
+      this._initials = {};
     }
 
     /**
+     * Returns a setter method for named property
      *
-     * @param {string} name
-     * @returns
+     * @protected
+     * @param {string} name - Property name
+     * @returns {(value: any) => void}
      */
     _setter(name) {
-      return (/** @type {any} */ value) => {
+      return (value) => {
         this._toUpdate.set(name, value);
+
+        /**
+         * indicate a new change has happened so that it can be processed
+         * in the current update cycle
+         */
         this._newChanges = true;
 
         this.triggerUpdate();
       };
     }
 
-    triggerUpdate() {
-      this._changePromise =
-        this._changePromise ||
-        Promise.resolve().then(() => {
-          return this.update(null);
-        });
-    }
-
     /**
+     * Returns a getter for named property
      *
-     * @param {string} name
-     * @returns
+     * @protected
+     * @param {string} name - Property name
+     * @returns {() => any}
      */
     _getter(name) {
       return () => {
+        /**
+         * Return the current pending change to this property or the current
+         * property value if there is no pending change
+         */
         return this._toUpdate.has(name)
           ? this._toUpdate.get(name)
           : this._props[name];
@@ -102,14 +180,20 @@ export const WaferMixin = (superclass) =>
     }
 
     /**
-     *
-     * @param {string} name
-     * @param {string | null} value
+     * Sets property value from named attribute
+     * @param {string} name - Property name
+     * @param {string | null} value - Attribute value
+     * @returns {void}
      */
     _setFromAttribute(name, value) {
       const { type } = this.props[name];
 
       if (value === null) {
+        /**
+         * For Boolean properties `null` indicated the attribute has been
+         * removed, so the property should be set to `false`. For all other
+         * types set the property value to `null`
+         */
         this[name] = type === Boolean ? false : null;
         return;
       }
@@ -119,6 +203,9 @@ export const WaferMixin = (superclass) =>
           this[name] = Number(value);
           return;
         case Boolean:
+          /**
+           * Any value set as a Boolean attributes indicates `true`
+           */
           this[name] = true;
           return;
         case String:
@@ -131,16 +218,32 @@ export const WaferMixin = (superclass) =>
     }
 
     /**
+     * Sets attribute from named property value
      *
-     * @param {string} name
-     * @param {any} value
+     * @param {string} name - Property name
+     * @param {any} value - Property value
+     * @returns {void}
      */
     _setFromProp(name, value) {
+      /**
+       * For components rendered on the server and are being rehydrated
+       * attribute values do not need to be set as the attributes will
+       * have been set to their correct values on the server
+       */
       if (!this.serverRendered()) {
         const { type, reflect } = this.props[name];
 
+        /**
+         * Don't update attribute if it's not reflected, nor if we are
+         * rendering on the server and don't intend to rehydrate - in which
+         * case setting the attribute is wasted bytes
+         */
         if (reflect || (this._serverContext && !this._serverOnly)) {
           if (type === Boolean) {
+            /**
+             * Any truthy value sets a Boolean attribute to the empty string,
+             * otherwise the attribute is removed
+             */
             if ([null, false].includes(value)) {
               if (this.hasAttribute(name)) {
                 this.removeAttribute(name);
@@ -164,20 +267,58 @@ export const WaferMixin = (superclass) =>
     }
 
     /**
+     * Callback triggered when an attribute with a name matching a property
+     * name is changed
      *
-     * @param {string} name
-     * @param {any} oldValue
-     * @param {any} newValue
+     * @param {string} name - Attribute name
+     * @param {any} oldValue - Old attribute value
+     * @param {any} newValue - New attribute value
+     * @returns {void}
      */
     attributeChangedCallback(name, oldValue, newValue) {
+      /**
+       * Set the property from the new attribute value unless:
+       *
+       * - the component hasn't yet been added to the DOM - in which case
+       * the attribute will be updated in `connectedCallback`.
+       *
+       * - or there are changes pending - in which case the attribute will
+       * be updated after all changed has been processed with the final value
+       *
+       * - the value hasn't changed
+       */
       if (this._connected && !this._changePromise && oldValue !== newValue) {
         this._setFromAttribute(name, newValue);
       }
     }
 
     /**
+     * Trigger an update to the component that will be run at the end
+     * of the current task
+     */
+    triggerUpdate() {
+      this._changePromise =
+        this._changePromise ||
+        Promise.resolve().then(() => {
+          return this.update(null);
+        });
+    }
+
+    /**
+     * Update property targets for all properties that are marked as changed
      *
      * @param {String[] | null} [props]
+     * List of property names whose targets should be updated, even if
+     * their value has not changed, in addition to the properties that have
+     * changed.
+     *
+     * An empty array indicates all properties should have their targets
+     * updated.
+     *
+     * `null` indicates that only those properties that have changed should
+     * have their targets updated.
+     *
+     * @returns {void}
      */
     update(props = []) {
       const propNames = props ? (props.length ? props : this._propNames) : [];
@@ -287,24 +428,39 @@ export const WaferMixin = (superclass) =>
     }
 
     /**
-     * A Map of changed props
+     * Called when all pending property value changes have been processed,
+     * but before their targets have been updated. Changes made to properties
+     * in this callback will not trigger another update, but the updated values
+     * will be used for the current update.
      *
      * @param {Map<String, any>} changed
-     * @returns {any[]|Promise<any[]>|void}
+     * A Map of properties and their old values that have changed in the
+     * current cycle
+     *
+     * @returns {string[]|Promise<string[]>|void}
+     * If an array of property names (or a Promise that resolves to an array) is
+     * returned then those properties will not have their targets updated.
+     *
      */
     // eslint-disable-next-line no-unused-vars
     changed(changed) {}
 
     /**
      *
+     * Called when all pending property target updates have been called. Changes
+     * made to properties in this callback will trigger another update cycle.
+     *
      * @param {Map<String, any>} updated
+     * A Map of properties and their old values that have had their targets
+     * updated in the current cycle
+     *
      * @returns {void|Promise<void>}
      */
     // eslint-disable-next-line no-unused-vars
     updated(updated) {}
 
     /**
-     *
+     * Called after the initial update of this component has occurred.
      * @param {Map<String, any>} updated
      * @returns {void|Promise<void>}
      */
@@ -312,16 +468,45 @@ export const WaferMixin = (superclass) =>
     firstUpdated(updated) {}
 
     /**
+     * Manually request an update cycle to run
      *
      * @param {String[] | null} [props]
+     * List of property names whose targets should be updated.
+     *
+     * An empty array indicates all properties should have their targets
+     * updated.
+     *
+     * `null` indicates that no properties should have their targets updated.
+     *
+     * @returns {Promise<void>}
      */
     async requestUpdate(props = []) {
+      /**
+       * Wait for any pending update cycle to finish
+       */
       await this.updateDone();
+
       this.update(props);
     }
 
+    /**
+     * Returns a promise that will resolve when the current update cycle is
+     * complete, or immediately if there is no update pending.
+     *
+     * @returns {Promise<void>}
+     */
     async updateDone() {
       await this._changePromise;
       await this._updatePromise;
+    }
+
+    /**
+     * Returns true if the component has been rendered on the server
+     * and has not yet been hydrated
+     *
+     * @returns {boolean}
+     */
+    serverRendered() {
+      return false;
     }
   };

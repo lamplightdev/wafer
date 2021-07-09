@@ -11,12 +11,12 @@
  */
 
 /**
- * @typedef Prop
- * @prop {StringConstructor | NumberConstructor | BooleanConstructor | ObjectConstructor | ArrayConstructor} type
- * @prop {any} [initial]
- * @prop {boolean} [reflect=false]
- * @prop {Target[]} [targets=[]]
- * @prop {string[]} [triggers=[]]
+ * @typedef Prop - Property definition
+ * @prop {StringConstructor | NumberConstructor | BooleanConstructor | ObjectConstructor | ArrayConstructor} type - Property type
+ * @prop {any} [initial] - Initial value for property
+ * @prop {boolean} [reflect=false] - Should the property be reflected to an attribute with the same name
+ * @prop {Target[]} [targets=[]] - A list of targets that should be updated when the property value changes
+ * @prop {string[]} [triggers=[]] - A list of other properties whose targets should be updated when this property changes
  */
 
 /**
