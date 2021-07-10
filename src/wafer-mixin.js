@@ -684,14 +684,4 @@ export const WaferMixin = (superclass) =>
       await this._changePromise;
       await this._updatePromise;
     }
-
-    /**
-     * Returns true if the component has been rendered on the server
-     * and has not yet been hydrated
-     *
-     * @returns {boolean}
-     */
-    serverRendered() {
-      return false;
-    }
   };

@@ -114,6 +114,10 @@ export class WaferServer extends WaferMixin(ServerElement) {
     super._connected = true;
   }
 
+  /**
+   * Returns true if the component has been rendered on the server
+   * and has not yet been hydrated. Only true in client context
+   */
   serverRendered() {
     return false;
   }

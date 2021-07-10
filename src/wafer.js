@@ -109,6 +109,10 @@ class WaferClient extends WaferMixin(HTMLElement) {
     super._connected = true;
   }
 
+  /**
+   * Returns true if the component has been rendered on the server
+   * and has not yet been hydrated
+   */
   serverRendered() {
     return this._firstUpdate && this.hasAttribute("wafer-ssr");
   }
