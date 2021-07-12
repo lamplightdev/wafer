@@ -166,7 +166,7 @@ export class WaferServer extends WaferMixin(ServerElement) {
    *
    * @returns {boolean}
    */
-  serverRendered() {
+  get _isRehydrating() {
     return false;
   }
 

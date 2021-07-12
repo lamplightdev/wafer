@@ -298,11 +298,11 @@ export const WaferMixin = (superclass) =>
      */
     _setFromProp(name, value) {
       /**
-       * For components rendered on the server and are being rehydrated
+       * For components rendered on the server and that are rehydrating
        * attribute values do not need to be set as the attributes will
        * have been set to their correct values on the server
        */
-      if (!this.serverRendered()) {
+      if (!this._isRehydrating) {
         const { type, reflect } = this.props[name];
 
         /**
@@ -596,7 +596,7 @@ export const WaferMixin = (superclass) =>
              * Don't apply updates if the element was rendered on the server
              * and this is the rehydration update
              */
-            if (!this.serverRendered()) {
+            if (!this._isRehydrating) {
               /**
                * List of properties whose targets should be updated
                *

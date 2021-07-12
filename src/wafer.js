@@ -50,7 +50,7 @@ class WaferClient extends WaferMixin(HTMLElement) {
        * on the server, and the browser supports DSD
        */
       if (!this.shadowRoot) {
-        if (this.serverRendered()) {
+        if (this._isRehydrating) {
           /**
            * The component was rendered on the server and hasn't been
            * rehydrated yet
@@ -96,7 +96,7 @@ class WaferClient extends WaferMixin(HTMLElement) {
       /**
        * Initialise the component
        */
-      if (!this.shadowRoot && !this.serverRendered()) {
+      if (!this.shadowRoot && !this._isRehydrating) {
         /**
          * The Light DOM is being used and wasn't rendered on the server so
          * stamp out the template and append to element content
@@ -128,11 +128,11 @@ class WaferClient extends WaferMixin(HTMLElement) {
 
   /**
    * Returns true if the component has been rendered on the server
-   * and has not yet been hydrated
+   * and has not yet been rehydrated
    *
    * @returns {boolean}
    */
-  serverRendered() {
+  get _isRehydrating() {
     return this._firstUpdate && this.hasAttribute("wafer-ssr");
   }
 
