@@ -28,7 +28,7 @@ describe("Wafer update/changed calls", () => {
 
     await el.updateDone();
 
-    expect(el._connected).to.equal(false);
+    expect(el._connectedOnce).to.equal(false);
 
     expect(spyChanged).to.have.callCount(1);
     // can't check for equal maps, since a key set to undefined is the same as a key that's not set (with chai)

@@ -8,6 +8,7 @@
  * @typedef { import("node-html-parser").Node } ParserNode
  * @typedef { import("node-html-parser").HTMLElement } ParserHTMLElement
  * @typedef { import("./server/element").ServerElement } ServerElement
+ * @typedef { import("./server/wafer").WaferServer } WaferServer
  */
 
 /**
@@ -46,22 +47,27 @@
  */
 
 /**
+ * @typedef ShadowOpts
+ * @type {'open' | 'closed' | false}}
+ */
+
+/**
  * @typedef ClientOpts
- * @prop {'open' | 'closed' | false} [shadow]
+ * @prop {ShadowOpts} [shadow]
  */
 
 /**
  * @typedef ServerOpts
- * @prop {'open' | 'closed' | false} [shadow]
+ * @prop {ShadowOpts} [shadow]
  * @prop {string} tagName
  * @prop {Object<string, string>} [attrs]
  */
 
 /**
  * @typedef TargetEvent
- * @prop {(this: Element, ev: Event) => any} fn
- * @prop {HTMLElement} [target]
- * @prop {boolean | AddEventListenerOptions | undefined} [opts]
+ * @prop {(this: Element, ev: Event) => any} fn - Function to call
+ * @prop {HTMLElement} [target] - Element to bind the function to
+ * @prop {boolean | AddEventListenerOptions | undefined} [opts] - Listener options
  */
 
 /**
@@ -89,6 +95,11 @@
  * @prop {Element} el
  * @prop {number} targetIndex
  * @prop {number} distance
+ */
+
+/**
+ * @typedef Registry
+ * @type {Object<string,{serverOnly?: boolean, def: new (...args: any[]) => WaferServer}>}
  */
 
 exports.unused = {};

@@ -10,10 +10,10 @@
  * @param {Element|import("./server/element").ServerElement} el
  * @param {Object} opts
  * @param {any} opts.value
- * @param {import("./types").Target[]} opts.targets
+ * @param {import("./types").Target[]} [opts.targets]
  *
  */
-const updateTargets = async (apply, el, { value, targets }) => {
+const updateTargets = async (apply, el, { value, targets = [] }) => {
   for (const target of targets) {
     const { selector, attribute, text, dom, property, use } = target;
 

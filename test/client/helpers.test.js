@@ -2,9 +2,9 @@ import { fixture, expect, oneEvent } from "@open-wc/testing";
 import sinon from "sinon";
 
 import { Wafer } from "../../src/wafer.js";
-import { emit, repeat } from "../../src/helpers.js";
+import { emit, repeat } from "../../src/dom.js";
 
-describe("Wafer helpers", () => {
+describe("Wafer DOM", () => {
   it("emit fires custom events with defaults", async () => {
     class Test0 extends Wafer {
       static template = "<button>Click me</button>";

@@ -1,7 +1,7 @@
 /**
  * Helpers for rendering in {@link WaferClient}
  *
- * @module HelpersClient
+ * @module DOMClient
  */
 
 import { updateTargets } from "./common.js";

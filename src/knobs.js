@@ -5,7 +5,7 @@
  */
 
 import { Wafer } from "./wafer.js";
-import { repeat } from "./helpers.js";
+import { repeat } from "./dom.js";
 
 // define an no-op html function to get syntax highlighting in template strings
 const html = String.raw;

@@ -19,17 +19,17 @@ export default [
     plugins: [terser()],
   },
   {
-    input: "src/helpers.js",
+    input: "src/dom.js",
     output: [
       {
-        file: "dist/helpers.js",
+        file: "dist/dom.js",
         format: "es",
         sourcemap: true,
       },
       {
-        file: "dist/helpers.browser.js",
+        file: "dist/dom.browser.js",
         format: "iife",
-        name: "WaferHelpers",
+        name: "WaferDOM",
       },
     ],
     plugins: [terser()],

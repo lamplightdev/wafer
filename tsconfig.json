@@ -19,12 +19,12 @@
       "src/types.js",
       "src/wafer.js",
       "src/wafer-mixin.js",
-      "src/helpers.js",
+      "src/dom.js",
       "src/knobs.js",
       "src/common.js",
       "src/server/wafer.js",
       "src/server/element.js",
-      "src/server/helpers.js"
+      "src/server/dom.js"
     ],
     "excludeExternals": true,
     "out": "../wafer-docs/api"

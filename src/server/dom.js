@@ -1,7 +1,7 @@
 /**
  * Helpers for rendering in {@link WaferServer}
  *
- * @module HelpersServer
+ * @module DOMServer
  */
 
 import { ServerElement, render } from "./element.js";

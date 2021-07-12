@@ -2,10 +2,10 @@ import { expect } from "../testing.js";
 import sinon from "sinon";
 
 import { WaferServer as Wafer } from "../../src/server/wafer.js";
-import { repeat } from "../../src/server/helpers.js";
+import { repeat } from "../../src/server/dom.js";
 import { ServerElement, render } from "../../src/server/element.js";
 
-describe("Wafer helpers", () => {
+describe("Wafer DOM", () => {
   it("can render elements in container with repeat", async () => {
     class Test extends Wafer {
       static template = "<div></div>";

@@ -37,6 +37,16 @@ export const WaferMixin = (superclass) =>
     }
 
     /**
+     * A list of all attributes whose values should be used to set
+     * properties
+     *
+     * @returns {string[]}
+     */
+    static get observedAttributes() {
+      return Object.keys(this.props);
+    }
+
+    /**
      * Property definitions
      *
      * @protected
@@ -55,12 +65,12 @@ export const WaferMixin = (superclass) =>
       super(...args);
 
       /**
-       * Flag indicating if element has been connected to DOM
+       * Flag indicating if element has been connected to DOM at least once
        *
        * @protected
        * @type {boolean}
        */
-      this._connected = false;
+      this._connectedOnce = false;
 
       /**
        * Array of property names
@@ -125,11 +135,12 @@ export const WaferMixin = (superclass) =>
       this._newChanges = false;
 
       /**
-       * Flag indicating if this component is being constructed on the server
-       * @protected
+       * Indicates if unreflected attributes should be removed
+       * on initialisation
+       *
        * @type {boolean}
        */
-      this._serverContext = false;
+      this._removeUnreflectedAttributes = true;
 
       /**
        * Initial values of properties
@@ -177,6 +188,67 @@ export const WaferMixin = (superclass) =>
           ? this._toUpdate.get(name)
           : this._props[name];
       };
+    }
+
+    /**
+     * Set up initial values of properties
+     *
+     * @protected
+     * @returns {void}
+     */
+    initialiseProps() {
+      for (const name of this._propNames) {
+        /**
+         * Grab any initial property values (i.e. values set imperatively, before
+         * this element was upgraded) or use declared initial values and
+         * store for use in `connectedCallback`
+         */
+        const { initial } = this.props[name];
+        this._initials[name] = this[name] !== undefined ? this[name] : initial;
+
+        /**
+         * Define our setter/getter pairs for each declared property so they
+         * can be intercepted in order to batch updates
+         */
+        Object.defineProperty(this, name, {
+          set: this._setter(name),
+          get: this._getter(name),
+        });
+      }
+    }
+
+    /**
+     * Set initial property values
+     *
+     * @returns {void}
+     */
+    setupPropValues() {
+      for (const name of this._propNames) {
+        if (this[name] === undefined) {
+          /**
+           * No property has been set either before or after construction
+           */
+          if (this.hasAttribute(name)) {
+            /**
+             * Initialise from attribute value if there is one
+             */
+            this._setFromAttribute(name, this.getAttribute(name));
+
+            if (
+              this._removeUnreflectedAttributes &&
+              !this.props[name].reflect
+            ) {
+              // remove any initial attribute set from server render if not reflected
+              // and we don't need them for rehydration (since this is server only)
+              this.removeAttribute(name);
+            }
+          } else {
+            this[name] = this._initials[name];
+          }
+        } else {
+          this._setFromProp(name, this[name]);
+        }
+      }
     }
 
     /**
@@ -238,7 +310,7 @@ export const WaferMixin = (superclass) =>
          * rendering on the server and don't intend to rehydrate - in which
          * case setting the attribute is wasted bytes
          */
-        if (reflect || (this._serverContext && !this._serverOnly)) {
+        if (reflect || !this._removeUnreflectedAttributes) {
           if (type === Boolean) {
             /**
              * Any truthy value sets a Boolean attribute to the empty string,
@@ -287,7 +359,11 @@ export const WaferMixin = (superclass) =>
        *
        * - the value hasn't changed
        */
-      if (this._connected && !this._changePromise && oldValue !== newValue) {
+      if (
+        this._connectedOnce &&
+        !this._changePromise &&
+        oldValue !== newValue
+      ) {
         this._setFromAttribute(name, newValue);
       }
     }
