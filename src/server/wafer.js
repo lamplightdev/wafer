@@ -171,6 +171,7 @@ export class WaferServer extends WaferMixin(ServerElement) {
   }
 
   /**
+   * Update the targets for property
    *
    * @param {string} name
    */
@@ -182,6 +183,8 @@ export class WaferServer extends WaferMixin(ServerElement) {
   }
 
   /**
+   * Proxy for `setAttribute` in {@link ServerElement} ensuring
+   * `attributeChangedCallback` is called on this component
    *
    * @param {string} key
    * @param {string} value
@@ -200,6 +203,8 @@ export class WaferServer extends WaferMixin(ServerElement) {
   }
 
   /**
+   * Proxy for `getAttribute` in {@link ServerElement} ensuring
+   * `attributeChangedCallback` is called on this component
    *
    * @param {string} key
    */
