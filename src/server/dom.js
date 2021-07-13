@@ -16,7 +16,7 @@ import { updateTargets } from "../common.js";
  * @param {((value: any, index: number) => string)} opts.keyFn
  * @param {import("../types").Target[]} [opts.targets]
  * @param { ((el: ServerElement, item?: any, index?: number) => void) | null} [opts.init]
- * @param {Object<string, {serverOnly?: boolean, def: new (...args: any[]) => import("./wafer").WaferServer}>} [opts.registry]
+ * @param {import("../types").Registry} [opts.registry]
  * @returns
  */
 const repeat = async ({

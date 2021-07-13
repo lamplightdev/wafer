@@ -164,9 +164,9 @@ export class WaferServer extends WaferMixin(ServerElement) {
    * Returns true if the component has been rendered on the server
    * and has not yet been hydrated. Only true in client context
    *
-   * @returns {boolean}
+   * @type {boolean}
    */
-  get _isRehydrating() {
+  get _needsRehydrating() {
     return false;
   }
 

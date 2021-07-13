@@ -12,7 +12,7 @@ class WaferClient extends WaferMixin(HTMLElement) {
   /**
    * Does the current client context support Declarative Shadow DOM
    *
-   * @returns {boolean}
+   * @type {boolean}
    */
   static get supportsDSD() {
     // eslint-disable-next-line no-prototype-builtins
@@ -27,7 +27,7 @@ class WaferClient extends WaferMixin(HTMLElement) {
    * different targets and/or use different event options
    *
    *
-   * @returns {Object<string, import("./types").TargetEvents>}
+   * @type {Object.<string, import("./types").TargetEvents>}
    */
   get events() {
     return {};
@@ -50,7 +50,7 @@ class WaferClient extends WaferMixin(HTMLElement) {
        * on the server, and the browser supports DSD
        */
       if (!this.shadowRoot) {
-        if (this._isRehydrating) {
+        if (this._needsRehydrating) {
           /**
            * The component was rendered on the server and hasn't been
            * rehydrated yet
@@ -96,7 +96,7 @@ class WaferClient extends WaferMixin(HTMLElement) {
       /**
        * Initialise the component
        */
-      if (!this.shadowRoot && !this._isRehydrating) {
+      if (!this.shadowRoot && !this._needsRehydrating) {
         /**
          * The Light DOM is being used and wasn't rendered on the server so
          * stamp out the template and append to element content
@@ -130,9 +130,9 @@ class WaferClient extends WaferMixin(HTMLElement) {
    * Returns true if the component has been rendered on the server
    * and has not yet been rehydrated
    *
-   * @returns {boolean}
+   * @type {boolean}
    */
-  get _isRehydrating() {
+  get _needsRehydrating() {
     return this._firstUpdate && this.hasAttribute("wafer-ssr");
   }
 

@@ -12,7 +12,7 @@ class ServerElement {
   /**
    *
    * @param {string} tagName
-   * @param {Object<string,string>} attrs
+   * @param {Object.<string,string>} attrs
    */
   constructor(tagName, attrs = {}) {
     if (tagName) {
@@ -150,7 +150,7 @@ class ServerElement {
 /**
  *
  * @param {typeof HTMLElement} el
- * @param {Object<string, { serverOnly?: boolean, def: new (...args: any[]) => import("./wafer").WaferServer}>} registry
+ * @param {import("../types").Registry} registry
  * @returns {Promise<ServerElement>}
  */
 const convert = async (el, registry = {}) => {
@@ -185,7 +185,7 @@ const convert = async (el, registry = {}) => {
 /**
  *
  * @param {string} data
- * @param {Object<string, {serverOnly?: boolean, def: new (...args: any[]) => import("./wafer").WaferServer}>} registry
+ * @param {import("../types").Registry} registry
  * @returns {Promise<ServerElement>}
  */
 const render = async (data, registry = {}) => {

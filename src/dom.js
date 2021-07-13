@@ -66,7 +66,7 @@ const emit = (
  * @param {((value: any, index: number) => string)} opts.keyFn
  * @param {import("./types").Target[]} [opts.targets]
  * @param { ((el: Element, item?: any, index?: number) => void) | null} [opts.init]
- * @param { Object<string, import("./types").TargetEvents>} [opts.events]
+ * @param { Object.<string, import("./types").TargetEvents>} [opts.events]
  *
  */
 const repeat = ({
@@ -79,11 +79,11 @@ const repeat = ({
   events = {},
 }) => {
   /**
-   * @type {Object<string, string>}
+   * @type {Object.<string, string>}
    */
   const indexToKey = {};
   /**
-   * @type {Object<string, {index: number, el: Element | null}>}
+   * @type {Object.<string, {index: number, el: Element | null}>}
    */
   const keyMap = {};
 
@@ -94,7 +94,7 @@ const repeat = ({
   }
 
   /**
-   * @type {Object<string, Element>}
+   * @type {Object.<string, Element>}
    */
   const existingEls = {};
   const toRemove = [];
@@ -117,8 +117,14 @@ const repeat = ({
   }
 
   // update and move those with greatest distance to travel first
+
   /**
-   * @type {import("./types").ElInfo[]}
+   * @typedef ElInfo
+   * @prop {Element} el - The existing element reference
+   * @prop {number} targetIndex - The index the element should be moved to
+   * @prop {number} distance - The distance the element needs to move
+   *
+   * @type {ElInfo[]}
    */
   const distanceToTravel = [];
   const childrenKeys = [...container.children].map((child) =>

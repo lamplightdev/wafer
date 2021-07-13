@@ -44,16 +44,16 @@
     "chai-html": "^2.0.1",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
-    "mocha": "^9.0.1",
+    "mocha": "^9.0.2",
     "prettier": "^2.3.2",
-    "rollup": "^2.52.6",
+    "rollup": "^2.53.1",
     "rollup-plugin-terser": "^7.0.2",
     "sinon": "^11.1.1",
     "sinon-chai": "^3.7.0",
-    "typedoc": "^0.21.2",
+    "typedoc": "^0.21.4",
     "typescript": "^4.3.x"
   },
   "dependencies": {
-    "node-html-parser": "^3.3.6"
+    "node-html-parser": "^4.1.0"
   }
 }

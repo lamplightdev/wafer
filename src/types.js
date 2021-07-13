@@ -1,5 +1,5 @@
 /**
- * Collection of typedefs used throughout Wafer
+ * Collection of type definitions used throughout Wafer
  *
  * @module Types
  */
@@ -12,7 +12,7 @@
  */
 
 /**
- * @typedef Prop - Property definition
+ * @typedef Prop - Property declaration
  * @prop {StringConstructor | NumberConstructor | BooleanConstructor | ObjectConstructor | ArrayConstructor} type - Property type
  * @prop {any} [initial] - Initial value for property
  * @prop {boolean} [reflect=false] - Should the property be reflected to an attribute with the same name
@@ -21,85 +21,69 @@
  */
 
 /**
- * @typedef Target
- * @prop {string | ((value: any) => string)} selector
- * @prop {string} [attribute]
- * @prop {string} [property]
- * @prop {boolean} [text=false]
- * @prop {DOMUpdateFn} [dom]
- * @prop {UseFn} [use]
+ * @typedef Target - Target declaration defining how to update elements matching `selector`
+ * @prop {string | ((value: any) => string)} selector - CSS3 selector
+ * @prop {string} [attribute] - which attribute on matches to update with the property value
+ * @prop {string} [property]  - which property on matches to update with the property value
+ * @prop {boolean} [text=false] - should the textContent of matches be set to the property value
+ * @prop {DOMUpdateFn} [dom] - a function that will be called when the property value changes - usually used for general DOM updates
+ * @prop {UseFn} [use] - a function that returns the value that should be used in updates (defaults to the property value itself)
  */
 
 /**
- * @callback DOMUpdateFn
- * @param {Element | ServerElement} target
- * @param {any} value
- * @param {Element | ServerElement} el
- * @returns {Promise<string | void> | void}
+ * @callback DOMUpdateFn - Function to run for a {@link ./Target} when a property value changes
+ * @param {Element | ServerElement} target - The target element itself
+ * @param {any} value - The property value (or the value returned from `use` if defined)
+ * @param {Element | ServerElement} el - Reference to the component
+ * @returns {Promise<string | void> | void} - In the server context only a returned promise will be `await`ed
  */
 
 /**
- * @callback UseFn
- * @param {any} value
- * @param {HTMLElement | {}} el
- * @param {HTMLElement | {}} [targetEl]
- * @returns {any}
+ * @callback UseFn - Function to run before updating {@link ./Target}s, returning the value to use in updates
+ * @param {any} value - The new property value
+ * @param {HTMLElement | {}} el - Reference to the component
+ * @param {HTMLElement | {}} [targetEl] - Reference to the target element
+ * @returns {any} - The value to use in updates, in place of the new property value
  */
 
 /**
- * @typedef ShadowOpts
- * @type {'open' | 'closed' | false}}
+ * @typedef ShadowOpts - If an what type of Shadow Root to attach
+ * @type {'open' | 'closed' | false} - False indicates no Shadow Root
  */
 
 /**
- * @typedef ClientOpts
- * @prop {ShadowOpts} [shadow]
+ * @typedef ClientOpts - Possible arguments passed to client constructor
+ * @prop {ShadowOpts} [shadow] - What type of Shadow Root to attach
  */
 
 /**
- * @typedef ServerOpts
- * @prop {ShadowOpts} [shadow]
- * @prop {string} tagName
- * @prop {Object<string, string>} [attrs]
+ * @typedef ServerOpts - Possible arguments passed to server constructor
+ * @prop {ShadowOpts} [shadow] - What type of Shadow Root to attach
+ * @prop {string} tagName - What tag should this component be defined with
+ * @prop {Object.<string, string>} [attrs] - Object of initial attribute name/values
  */
 
 /**
- * @typedef TargetEvent
+ * @typedef TargetEvent - Explicit event handler
  * @prop {(this: Element, ev: Event) => any} fn - Function to call
  * @prop {HTMLElement} [target] - Element to bind the function to
- * @prop {boolean | AddEventListenerOptions | undefined} [opts] - Listener options
+ * @prop {boolean | AddEventListenerOptions | undefined} [opts] - Event listener options
  */
 
 /**
- * @typedef {Object<string, ((this: Element, ev: Event) => any) | TargetEvent>} TargetEvents
+ * @typedef TargetEvents - Object of event names to event handlers
+ * @type {Object.<string, ((this: Element, ev: Event) => any) | TargetEvent>} - explicit {@link TargetEvent} definition, or a function that will be automatically bound to the component
  */
 
 /**
- * @typedef ElOpts
- * @prop {'open' | 'closed' | false} [shadow]
- * @prop {string | ParserNode | ParserNode[] | null} [shadowContents]
- * @prop {ParserHTMLElement[]} [contents]
- * @prop {Object<string, any>} [attrs]
- * @prop {Target[]} [targets]
+ * @typedef RegistryEntry
+ * @prop {new (...args: any[]) => WaferServer} def - The component definition
+ * @prop {boolean} [serverOnly] - If this component is intended only to be rendered on server (i.e. not upgraded or rehydrated on client)
  */
 
 /**
- * @typedef CustomElOpts
- * @prop {ParserHTMLElement[]} [contents]
- * @prop {Object<string, any>} [attrs]
- * @prop {Object<string, any>} [props]
+ * @typedef Registry - Object of tag names to component definitions
+ * @type {Object.<string,RegistryEntry>}
  */
 
-/**
- * @typedef ElInfo
- * @prop {Element} el
- * @prop {number} targetIndex
- * @prop {number} distance
- */
-
-/**
- * @typedef Registry
- * @type {Object<string,{serverOnly?: boolean, def: new (...args: any[]) => WaferServer}>}
- */
-
-exports.unused = {};
+export {};

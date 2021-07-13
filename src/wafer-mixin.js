@@ -28,9 +28,7 @@ export const WaferMixin = (superclass) =>
     /**
      * Property definitions
      *
-     * @protected
-     * @readonly
-     * @type {Object<string, import("./types").Prop>}
+     * @type {Object.<string, import("./types").Prop>}
      */
     static get props() {
       return {};
@@ -40,7 +38,7 @@ export const WaferMixin = (superclass) =>
      * A list of all attributes whose values should be used to set
      * properties
      *
-     * @returns {string[]}
+     * @type {string[]}
      */
     static get observedAttributes() {
       return Object.keys(this.props);
@@ -49,9 +47,7 @@ export const WaferMixin = (superclass) =>
     /**
      * Property definitions
      *
-     * @protected
-     * @readonly
-     * @type Object<string, import("./types").Prop>
+     * @type {Object.<string, import("./types").Prop>}
      */
     get props() {
       return /** @type {typeof Wafer} */ (this.constructor).props;
@@ -83,10 +79,11 @@ export const WaferMixin = (superclass) =>
 
       /**
        * Current values of properties
+       * <string, any>
        *
        * @protected
        * @readonly
-       * @type {Object<string, any>}
+       * @type {Object.<string, any>}
        */
       this._props = {};
 
@@ -145,7 +142,7 @@ export const WaferMixin = (superclass) =>
       /**
        * Initial values of properties
        * @protected
-       * @type {Object<string,any>}
+       * @type {Object.<string,any>}
        */
       this._initials = {};
     }
@@ -298,11 +295,11 @@ export const WaferMixin = (superclass) =>
      */
     _setFromProp(name, value) {
       /**
-       * For components rendered on the server and that are rehydrating
+       * For components rendered on the server and that are rehydrating,
        * attribute values do not need to be set as the attributes will
        * have been set to their correct values on the server
        */
-      if (!this._isRehydrating) {
+      if (!this._needsRehydrating) {
         const { type, reflect } = this.props[name];
 
         /**
@@ -426,7 +423,7 @@ export const WaferMixin = (superclass) =>
            * Object of property name/values containing all the properties and
            * their values at the point the update was initiated
            *
-           * @type {Object<string, any>}
+           * @type {Object.<string, any>}
            */
           const initialValues = {
             ...this._props,
@@ -435,7 +432,7 @@ export const WaferMixin = (superclass) =>
           /**
            * Object of property names whose targets should *not* be updated
            *
-           * @type {Object<string, boolean>}
+           * @type {Object.<string, boolean>}
            */
           const noUpdate = {};
 
@@ -596,7 +593,7 @@ export const WaferMixin = (superclass) =>
              * Don't apply updates if the element was rendered on the server
              * and this is the rehydration update
              */
-            if (!this._isRehydrating) {
+            if (!this._needsRehydrating) {
               /**
                * List of properties whose targets should be updated
                *
@@ -609,7 +606,7 @@ export const WaferMixin = (superclass) =>
                * due to being defined as being triggered by another component
                * change
                *
-               * @type {Object<string, boolean>}
+               * @type {Object.<string, boolean>}
                */
               const otherTriggers = {};
 
