@@ -3,7 +3,7 @@ import sinon from "sinon";
 
 import { WaferServer as Wafer } from "../../src/server/wafer.js";
 import { repeat } from "../../src/server/dom.js";
-import { ServerElement, render } from "../../src/server/element.js";
+import { ServerElement, parse } from "../../src/server/element.js";
 
 describe("Wafer DOM", () => {
   it("can render elements in container with repeat", async () => {
@@ -37,7 +37,7 @@ describe("Wafer DOM", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test></wafer-test>
       `,
@@ -87,7 +87,7 @@ describe("Wafer DOM", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test></wafer-test>
       `,
@@ -154,7 +154,7 @@ describe("Wafer DOM", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test></wafer-test>
       `,
@@ -225,7 +225,7 @@ describe("Wafer DOM", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test></wafer-test>
       `,
@@ -299,7 +299,7 @@ describe("Wafer DOM", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test></wafer-test>
       `,

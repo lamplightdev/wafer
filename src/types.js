@@ -21,8 +21,9 @@
  */
 
 /**
- * @typedef Target - Target declaration defining how to update elements matching `selector`
- * @prop {string | ((value: any) => string)} selector - CSS3 selector
+ * @typedef Target
+ * Target declaration defining how to update elements matching `selector`
+ * @prop {string | ((value: any) => string)} selector CSS3 selector
  * @prop {string} [attribute] - which attribute on matches to update with the property value
  * @prop {string} [property]  - which property on matches to update with the property value
  * @prop {boolean} [text=false] - should the textContent of matches be set to the property value
@@ -82,7 +83,7 @@
  */
 
 /**
- * @typedef Registry - Object of tag names to component definitions
+ * @typedef Registry - Object of tag names to Wafer component definitions
  * @type {Object.<string,RegistryEntry>}
  */
 

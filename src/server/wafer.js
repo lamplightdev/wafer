@@ -5,7 +5,7 @@
  */
 
 import { WaferMixin } from "../wafer-mixin.js";
-import { ServerElement, render } from "./element.js";
+import { ServerElement, parse } from "./element.js";
 import { updateTargets } from "../common.js";
 import { apply } from "./dom.js";
 
@@ -14,7 +14,7 @@ export class WaferServer extends WaferMixin(ServerElement) {
    *
    * @param {import("../types").ServerOpts} opts
    * @param {import("../types").Registry} registry
-   * Registry of components and their definitions that should be upgraded if
+   * Registry of components and their Wafer definitions that should be upgraded if
    * found in the component template
    */
   constructor({ shadow = "open", tagName, attrs = {} }, registry = {}) {
@@ -75,7 +75,7 @@ export class WaferServer extends WaferMixin(ServerElement) {
       /**
        * Render template as a series of {@link ServerElement}s
        */
-      const template = await render(
+      const template = await parse(
         /** @type {typeof WaferServer} */ (this.constructor).template,
         this._registry
       );
@@ -125,7 +125,7 @@ export class WaferServer extends WaferMixin(ServerElement) {
          * and append to element content as a series of {@link ServerElement}s
          */
 
-        const container = await render(
+        const container = await parse(
           /** @type {typeof WaferServer} */ (this.constructor).template,
           this._registry
         );

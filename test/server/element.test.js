@@ -1,6 +1,6 @@
 import { expect } from "../testing.js";
 
-import { ServerElement, render } from "../../src/server/element.js";
+import { ServerElement, parse } from "../../src/server/element.js";
 
 describe("Wafer element", () => {
   it("can set content using innerHTML", async () => {

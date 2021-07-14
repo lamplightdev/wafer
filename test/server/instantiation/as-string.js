@@ -2,7 +2,7 @@ import { expect } from "../../testing.js";
 import sinon from "sinon";
 
 import { WaferServer as Wafer } from "../../../src/server/wafer.js";
-import { render } from "../../../src/server/element.js";
+import { parse } from "../../../src/server/element.js";
 import configs from "../../configs.js";
 
 describe("Wafer sets attributes and properties on element when defined as string", () => {
@@ -22,7 +22,7 @@ describe("Wafer sets attributes and properties on element when defined as string
             static props = config.props;
           }
 
-          const html = await render(test.html(`${configIndex}-${testIndex}`), {
+          const html = await parse(test.html(`${configIndex}-${testIndex}`), {
             [`wafer-test-${configIndex}-${testIndex}`]: { def: Test },
           });
 

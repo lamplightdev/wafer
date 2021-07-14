@@ -2,7 +2,7 @@ import { expect } from "../testing.js";
 import sinon from "sinon";
 
 import { WaferServer as Wafer } from "../../src/server/wafer.js";
-import { ServerElement, render } from "../../src/server/element.js";
+import { ServerElement, parse } from "../../src/server/element.js";
 
 describe("Wafer renders expected content", () => {
   it("renders in shadow DOM", async () => {
@@ -61,7 +61,7 @@ describe("Wafer renders expected content", () => {
       static template = "<h1>Hi <slot></slot></h1>";
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test>
         <span>Chris</span>
@@ -97,7 +97,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test name="Chris"></wafer-test>
       `,
@@ -130,7 +130,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test name="Chris">
         <span id="name"></span>
@@ -237,7 +237,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test on></wafer-test>
       `,
@@ -274,7 +274,7 @@ describe("Wafer renders expected content", () => {
       }
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test on></wafer-test>
       `,
@@ -307,7 +307,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test test="foo"></wafer-test>
       `,
@@ -346,7 +346,7 @@ describe("Wafer renders expected content", () => {
       }
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test test="foo"></wafer-test>
       `,
@@ -383,7 +383,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test test="foo"></wafer-test>
       `,
@@ -426,7 +426,7 @@ describe("Wafer renders expected content", () => {
       }
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test test="foo"></wafer-test>
       `,
@@ -462,7 +462,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test active="3"></wafer-test>
       `,
@@ -497,7 +497,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test active="3"></wafer-test>
       `,
@@ -530,7 +530,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test active="3"></wafer-test>
       `,
@@ -577,7 +577,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <title></title>
       <wafer-test></wafer-test>
@@ -604,7 +604,7 @@ describe("Wafer renders expected content", () => {
       };
     }
 
-    const html = await render(
+    const html = await parse(
       `
       <wafer-test title="foo"></wafer-test>
       `,

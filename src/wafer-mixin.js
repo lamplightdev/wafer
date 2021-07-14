@@ -17,8 +17,6 @@ export const WaferMixin = (superclass) =>
     /**
      * Static template string
      *
-     * @protected
-     * @readonly
      * @type {string}
      */
     static get template() {
@@ -45,7 +43,7 @@ export const WaferMixin = (superclass) =>
     }
 
     /**
-     * Property definitions
+     * Property definitions Prop
      *
      * @type {Object.<string, import("./types").Prop>}
      */
@@ -63,7 +61,6 @@ export const WaferMixin = (superclass) =>
       /**
        * Flag indicating if element has been connected to DOM at least once
        *
-       * @protected
        * @type {boolean}
        */
       this._connectedOnce = false;
@@ -71,8 +68,6 @@ export const WaferMixin = (superclass) =>
       /**
        * Array of property names
        *
-       * @protected
-       * @readonly
        * @type {string[]}
        */
       this._propNames = Object.keys(this.props);
@@ -81,8 +76,6 @@ export const WaferMixin = (superclass) =>
        * Current values of properties
        * <string, any>
        *
-       * @protected
-       * @readonly
        * @type {Object.<string, any>}
        */
       this._props = {};
@@ -91,7 +84,6 @@ export const WaferMixin = (superclass) =>
        * Promise that will resolve when all the currently pending property
        * changes have been processed
        *
-       * @private
        * @type {Promise<void> | null}
        */
       this._changePromise = null;
@@ -100,7 +92,6 @@ export const WaferMixin = (superclass) =>
        * Promise that will resolve when all the current updates
        * have been triggered
        *
-       * @private
        * @type {Promise<void> | null}
        */
       this._updatePromise = null;
@@ -109,8 +100,6 @@ export const WaferMixin = (superclass) =>
        * Map of all properties to their new values, that have changed in the
        * current update cycle
        *
-       * @private
-       * @readonly
        * @type {Map<String, any>}
        */
       this._toUpdate = new Map();
@@ -126,7 +115,6 @@ export const WaferMixin = (superclass) =>
        * Flag indicating if there are any pending changes in the current update
        * cycle
        *
-       * @private
        * @type {boolean}
        */
       this._newChanges = false;
@@ -141,8 +129,7 @@ export const WaferMixin = (superclass) =>
 
       /**
        * Initial values of properties
-       * @protected
-       * @type {Object.<string,any>}
+       * @type {Object.<string, any>}
        */
       this._initials = {};
     }
@@ -150,7 +137,6 @@ export const WaferMixin = (superclass) =>
     /**
      * Returns a setter method for named property
      *
-     * @protected
      * @param {string} name - Property name
      * @returns {(value: any) => void}
      */
@@ -171,7 +157,6 @@ export const WaferMixin = (superclass) =>
     /**
      * Returns a getter for named property
      *
-     * @protected
      * @param {string} name - Property name
      * @returns {() => any}
      */
@@ -190,7 +175,6 @@ export const WaferMixin = (superclass) =>
     /**
      * Set up initial values of properties
      *
-     * @protected
      * @returns {void}
      */
     initialiseProps() {

@@ -1,6 +1,6 @@
 {
   "name": "@lamplightdev/wafer",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "Web Component Base Class",
   "main": "lib/wafer.js",
   "exports": "./lib/wafer.js",
@@ -18,7 +18,7 @@
     "test:server:coverage": "c8 --reporter=html --reports-dir=coverage-server/ mocha test/server --recursive --exclude test/configs.js",
     "dist": "rollup -c",
     "tsc": "tsc",
-    "typedoc": "typedoc --theme ./typedoc-theme",
+    "typedoc": "typedoc --theme ./typedoc-theme --listInvalidSymbolLinks --logLevel Verbose",
     "lint": "eslint \"src/*.js\" \"src/server/*.js\"",
     "format": "npm run format:eslint && npm run format:prettier",
     "format:eslint": "eslint \"src/*.js\" \"src/server/*.js\" --fix",
