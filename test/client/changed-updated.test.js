@@ -486,4 +486,45 @@ describe("Wafer update/changed calls", () => {
     expect(el).attr("test2").to.equal("baz");
     expect(el.test2).to.equal("baz");
   });
+
+  it(`updateDone should wait if updated returns promise that updates a property in updated`, async () => {
+    class Test extends Wafer {
+      static props = {
+        test: {
+          type: String,
+          reflect: true,
+          initial: "foo",
+        },
+      };
+
+      updated(changed) {
+        if (changed.has("test") && this.test === "bar") {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              this.test = "baz";
+              resolve();
+            }, 100);
+          });
+        }
+      }
+    }
+    customElements.define(`wafer-test-10`, Test);
+
+    /**
+     * @type {Test}
+     */
+    const el = new Test();
+
+    document.body.append(el);
+    await el.updateDone();
+
+    const spyUpdate = sinon.spy(el, "update");
+
+    el.test = "bar";
+
+    await el.updateDone();
+
+    expect(spyUpdate).to.have.callCount(2);
+    expect(el.test).to.equal("baz");
+  });
 });
