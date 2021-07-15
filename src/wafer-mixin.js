@@ -324,8 +324,8 @@ export const WaferMixin = (superclass) =>
      * name is changed
      *
      * @param {string} name - Attribute name
-     * @param {any} oldValue - Old attribute value
-     * @param {any} newValue - New attribute value
+     * @param {string|null} oldValue - Old attribute value
+     * @param {string|null} newValue - New attribute value
      * @returns {void}
      */
     attributeChangedCallback(name, oldValue, newValue) {
