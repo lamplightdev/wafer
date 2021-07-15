@@ -22,6 +22,8 @@ describe("Wafer sets attributes and properties on element when defined as string
             static props = config.props;
           }
 
+          const attrName = config.props.test.attributeName || "test";
+
           const html = await parse(test.html(`${configIndex}-${testIndex}`), {
             [`wafer-test-${configIndex}-${testIndex}`]: { def: Test },
           });
@@ -42,9 +44,9 @@ describe("Wafer sets attributes and properties on element when defined as string
                 ? JSON.stringify(test.expected.prop)
                 : `${test.expected.prop}`;
 
-            expect(el.getAttribute("test")).to.equal(attrValue);
+            expect(el.getAttribute(attrName)).to.equal(attrValue);
           } else {
-            expect(el.getAttribute("test")).to.equal(undefined);
+            expect(el.getAttribute(attrName)).to.equal(undefined);
           }
 
           expect(el.test).to.deep.equal(test.expected.prop);

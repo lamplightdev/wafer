@@ -21,6 +21,8 @@ describe("Wafer sets attributes and properties on element when defined after DOM
             static props = config.props;
           }
 
+          const attrName = config.props.test.attributeName || "test";
+
           /**
            * @type {Test}
            */
@@ -62,9 +64,9 @@ describe("Wafer sets attributes and properties on element when defined after DOM
           }
 
           if (test.expected.attribute !== null) {
-            expect(el).attr("test").to.equal(test.expected.attribute);
+            expect(el).attr(attrName).to.equal(test.expected.attribute);
           } else {
-            expect(el).not.to.have.attr("test");
+            expect(el).not.to.have.attr(attrName);
           }
           expect(el.test).to.deep.equal(test.expected.prop);
         }

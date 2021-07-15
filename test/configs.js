@@ -1,52 +1,52 @@
 export default [
   // String
   {
-    description: 'String with initial, with reflect',
+    description: "String with initial, with reflect",
     props: {
       test: {
         type: String,
         reflect: true,
-        initial: 'foo',
+        initial: "foo",
       },
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
         expected: {
-          prop: 'foo',
-          attribute: 'foo',
+          prop: "foo",
+          attribute: "foo",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="bar"></wafer-test-${key}>
   `,
-        attrs: { test: 'bar' },
+        attrs: { test: "bar" },
         expected: {
-          prop: 'bar',
-          attribute: 'bar',
+          prop: "bar",
+          attribute: "bar",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -55,7 +55,7 @@ export default [
   },
 
   {
-    description: 'String without initial, with reflect',
+    description: "String without initial, with reflect",
     props: {
       test: {
         type: String,
@@ -64,7 +64,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -76,22 +76,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="bar"></wafer-test-${key}>
   `,
-        attrs: { test: 'bar' },
+        attrs: { test: "bar" },
         expected: {
-          prop: 'bar',
-          attribute: 'bar',
+          prop: "bar",
+          attribute: "bar",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -100,52 +100,52 @@ export default [
   },
 
   {
-    description: 'String with initial, without reflect',
+    description: "String with initial, without reflect",
     props: {
       test: {
         type: String,
-        initial: 'foo',
+        initial: "foo",
         reflect: false,
       },
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
         expected: {
-          prop: 'foo',
+          prop: "foo",
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="bar"></wafer-test-${key}>
   `,
-        attrs: { test: 'bar' },
+        attrs: { test: "bar" },
         expected: {
-          prop: 'bar',
+          prop: "bar",
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -154,7 +154,7 @@ export default [
   },
 
   {
-    description: 'String without initial, without reflect',
+    description: "String without initial, without reflect",
     props: {
       test: {
         type: String,
@@ -162,7 +162,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -174,22 +174,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="bar"></wafer-test-${key}>
   `,
-        attrs: { test: 'bar' },
+        attrs: { test: "bar" },
         expected: {
-          prop: 'bar',
+          prop: "bar",
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -199,7 +199,7 @@ export default [
 
   // Number
   {
-    description: 'Number with initial, with reflect',
+    description: "Number with initial, with reflect",
     props: {
       test: {
         type: Number,
@@ -209,42 +209,42 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
         expected: {
           prop: 10,
-          attribute: '10',
+          attribute: "10",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="20"></wafer-test-${key}>
   `,
-        attrs: { test: '20' },
+        attrs: { test: "20" },
         expected: {
           prop: 20,
-          attribute: '20',
+          attribute: "20",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -253,7 +253,7 @@ export default [
   },
 
   {
-    description: 'Number without initial, with reflect',
+    description: "Number without initial, with reflect",
     props: {
       test: {
         type: Number,
@@ -262,7 +262,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -274,22 +274,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="20"></wafer-test-${key}>
   `,
-        attrs: { test: '20' },
+        attrs: { test: "20" },
         expected: {
           prop: 20,
-          attribute: '20',
+          attribute: "20",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -298,7 +298,7 @@ export default [
   },
 
   {
-    description: 'Number with initial, without reflect',
+    description: "Number with initial, without reflect",
     props: {
       test: {
         type: Number,
@@ -308,7 +308,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -317,33 +317,33 @@ export default [
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="20"></wafer-test-${key}>
   `,
-        attrs: { test: '20' },
+        attrs: { test: "20" },
         expected: {
           prop: 20,
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -352,7 +352,7 @@ export default [
   },
 
   {
-    description: 'Number without initial, without reflect',
+    description: "Number without initial, without reflect",
     props: {
       test: {
         type: Number,
@@ -360,7 +360,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -372,22 +372,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test="20"></wafer-test-${key}>
   `,
-        attrs: { test: '20' },
+        attrs: { test: "20" },
         expected: {
           prop: 20,
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -397,7 +397,7 @@ export default [
 
   // Boolean
   {
-    description: 'Boolean with initial (true), with reflect',
+    description: "Boolean with initial (true), with reflect",
     props: {
       test: {
         type: Boolean,
@@ -407,42 +407,42 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
         expected: {
           prop: true,
-          attribute: '',
+          attribute: "",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test></wafer-test-${key}>
   `,
-        attrs: { test: '' },
+        attrs: { test: "" },
         expected: {
           prop: true,
-          attribute: '',
+          attribute: "",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -451,7 +451,7 @@ export default [
   },
 
   {
-    description: 'Boolean with initial (false), with reflect',
+    description: "Boolean with initial (false), with reflect",
     props: {
       test: {
         type: Boolean,
@@ -461,7 +461,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -470,33 +470,33 @@ export default [
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test></wafer-test-${key}>
   `,
-        attrs: { test: '' },
+        attrs: { test: "" },
         expected: {
           prop: true,
-          attribute: '',
+          attribute: "",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -505,7 +505,7 @@ export default [
   },
 
   {
-    description: 'Boolean without initial, with reflect',
+    description: "Boolean without initial, with reflect",
     props: {
       test: {
         type: Boolean,
@@ -514,7 +514,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -526,22 +526,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test></wafer-test-${key}>
   `,
-        attrs: { test: '' },
+        attrs: { test: "" },
         expected: {
           prop: true,
-          attribute: '',
+          attribute: "",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -550,7 +550,7 @@ export default [
   },
 
   {
-    description: 'Boolean with initial (true), without reflect',
+    description: "Boolean with initial (true), without reflect",
     props: {
       test: {
         type: Boolean,
@@ -560,7 +560,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -569,33 +569,33 @@ export default [
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test></wafer-test-${key}>
   `,
-        attrs: { test: '' },
+        attrs: { test: "" },
         expected: {
           prop: true,
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -604,7 +604,7 @@ export default [
   },
 
   {
-    description: 'Boolean with initial (false), without reflect',
+    description: "Boolean with initial (false), without reflect",
     props: {
       test: {
         type: Boolean,
@@ -614,7 +614,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -623,33 +623,33 @@ export default [
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test></wafer-test-${key}>
   `,
-        attrs: { test: '' },
+        attrs: { test: "" },
         expected: {
           prop: true,
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -658,7 +658,7 @@ export default [
   },
 
   {
-    description: 'Boolean without initial, without reflect',
+    description: "Boolean without initial, without reflect",
     props: {
       test: {
         type: Boolean,
@@ -666,7 +666,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -678,22 +678,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test></wafer-test-${key}>
   `,
-        attrs: { test: '' },
+        attrs: { test: "" },
         expected: {
           prop: true,
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -703,52 +703,52 @@ export default [
 
   // Object
   {
-    description: 'Object with initial, with reflect',
+    description: "Object with initial, with reflect",
     props: {
       test: {
         type: Object,
         reflect: true,
-        initial: { foo: 'bar' },
+        initial: { foo: "bar" },
       },
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
         expected: {
-          prop: { foo: 'bar' },
+          prop: { foo: "bar" },
           attribute: '{"foo":"bar"}',
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='{"foo":"baz"}'></wafer-test-${key}>
   `,
         attrs: { test: '{"foo":"baz"}' },
         expected: {
-          prop: { foo: 'baz' },
+          prop: { foo: "baz" },
           attribute: '{"foo":"baz"}',
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -757,7 +757,7 @@ export default [
   },
 
   {
-    description: 'Object without initial, with reflect',
+    description: "Object without initial, with reflect",
     props: {
       test: {
         type: Object,
@@ -766,7 +766,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -778,22 +778,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='{"foo":"baz"}'></wafer-test-${key}>
   `,
         attrs: { test: '{"foo":"baz"}' },
         expected: {
-          prop: { foo: 'baz' },
+          prop: { foo: "baz" },
           attribute: '{"foo":"baz"}',
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -802,52 +802,52 @@ export default [
   },
 
   {
-    description: 'Object with initial, without reflect',
+    description: "Object with initial, without reflect",
     props: {
       test: {
         type: Object,
-        initial: { foo: 'bar' },
+        initial: { foo: "bar" },
         reflect: false,
       },
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
         expected: {
-          prop: { foo: 'bar' },
+          prop: { foo: "bar" },
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='{"foo":"baz"}'></wafer-test-${key}>
   `,
         attrs: { test: '{"foo":"baz"}' },
         expected: {
-          prop: { foo: 'baz' },
+          prop: { foo: "baz" },
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -856,7 +856,7 @@ export default [
   },
 
   {
-    description: 'Object without initial, without reflect',
+    description: "Object without initial, without reflect",
     props: {
       test: {
         type: Object,
@@ -864,7 +864,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -876,22 +876,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='{"foo":"baz"}'></wafer-test-${key}>
   `,
         attrs: { test: '{"foo":"baz"}' },
         expected: {
-          prop: { foo: 'baz' },
+          prop: { foo: "baz" },
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -901,7 +901,7 @@ export default [
 
   // Array
   {
-    description: 'Array with initial, with reflect',
+    description: "Array with initial, with reflect",
     props: {
       test: {
         type: Object,
@@ -911,42 +911,42 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
         expected: {
           prop: [1, 2, 3],
-          attribute: '[1,2,3]',
+          attribute: "[1,2,3]",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='[4,5,6]'></wafer-test-${key}>
   `,
-        attrs: { test: '[4,5,6]' },
+        attrs: { test: "[4,5,6]" },
         expected: {
           prop: [4, 5, 6],
-          attribute: '[4,5,6]',
+          attribute: "[4,5,6]",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -955,7 +955,7 @@ export default [
   },
 
   {
-    description: 'Array without initial, with reflect',
+    description: "Array without initial, with reflect",
     props: {
       test: {
         type: Array,
@@ -964,7 +964,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -976,22 +976,22 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='[4,5,6]'></wafer-test-${key}>
   `,
-        attrs: { test: '[4,5,6]' },
+        attrs: { test: "[4,5,6]" },
         expected: {
           prop: [4, 5, 6],
-          attribute: '[4,5,6]',
+          attribute: "[4,5,6]",
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -1000,7 +1000,7 @@ export default [
   },
 
   {
-    description: 'Array with initial, without reflect',
+    description: "Array with initial, without reflect",
     props: {
       test: {
         type: Array,
@@ -1010,7 +1010,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -1019,33 +1019,33 @@ export default [
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='[4,5,6]'></wafer-test-${key}>
   `,
-        attrs: { test: '[4,5,6]' },
+        attrs: { test: "[4,5,6]" },
         expected: {
           prop: [4, 5, 6],
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
         },
@@ -1054,7 +1054,7 @@ export default [
   },
 
   {
-    description: 'Array without initial, without reflect',
+    description: "Array without initial, without reflect",
     props: {
       test: {
         type: Object,
@@ -1062,7 +1062,7 @@ export default [
     },
     tests: [
       {
-        description: 'without value',
+        description: "without value",
         html: (key) => `
     <wafer-test-${key}></wafer-test-${key}>
   `,
@@ -1074,22 +1074,158 @@ export default [
         },
       },
       {
-        description: 'with value',
+        description: "with value",
         html: (key) => `
     <wafer-test-${key} test='[4,5,6]'></wafer-test-${key}>
   `,
-        attrs: { test: '[4,5,6]' },
+        attrs: { test: "[4,5,6]" },
         expected: {
           prop: [4, 5, 6],
           attribute: null,
           changed: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
             },
           ],
           updated: [
             {
-              value: new Map([['test', undefined]]),
+              value: new Map([["test", undefined]]),
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    description: "Attribute with declared name (no initial, with reflect)",
+    props: {
+      test: {
+        type: String,
+        reflect: true,
+        attributeName: "foo",
+      },
+    },
+    tests: [
+      {
+        description: "sets prop from attribute",
+        html: (key) => `
+    <wafer-test-${key} foo="bar"></wafer-test-${key}>
+  `,
+        attrs: { foo: "bar" },
+        expected: {
+          prop: "bar",
+          attribute: "bar",
+          changed: [
+            {
+              value: new Map([["test", undefined]]),
+            },
+          ],
+          updated: [
+            {
+              value: new Map([["test", undefined]]),
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    description: "Attribute with declared name (no initial, without reflect)",
+    props: {
+      test: {
+        type: String,
+        reflect: false,
+        attributeName: "foo",
+      },
+    },
+    tests: [
+      {
+        description: "sets prop from attribute",
+        html: (key) => `
+    <wafer-test-${key} foo="bar"></wafer-test-${key}>
+  `,
+        attrs: { foo: "bar" },
+        expected: {
+          prop: "bar",
+          attribute: null,
+          changed: [
+            {
+              value: new Map([["test", undefined]]),
+            },
+          ],
+          updated: [
+            {
+              value: new Map([["test", undefined]]),
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    description: "Attribute with declared name (with initial, with reflect)",
+    props: {
+      test: {
+        type: String,
+        reflect: true,
+        attributeName: "foo",
+        initial: "bar",
+      },
+    },
+    tests: [
+      {
+        description: "sets attribute from prop",
+        html: (key) => `
+    <wafer-test-${key}></wafer-test-${key}>
+  `,
+        expected: {
+          prop: "bar",
+          attribute: "bar",
+          changed: [
+            {
+              value: new Map([["test", undefined]]),
+            },
+          ],
+          updated: [
+            {
+              value: new Map([["test", undefined]]),
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    description: "Attribute with declared name (with initial, without reflect)",
+    props: {
+      test: {
+        type: String,
+        reflect: false,
+        attributeName: "foo",
+        initial: "bar",
+      },
+    },
+    tests: [
+      {
+        description: "sets prop from attribute",
+        html: (key) => `
+    <wafer-test-${key}></wafer-test-${key}>
+  `,
+        expected: {
+          prop: "bar",
+          attribute: null,
+          changed: [
+            {
+              value: new Map([["test", undefined]]),
+            },
+          ],
+          updated: [
+            {
+              value: new Map([["test", undefined]]),
             },
           ],
         },
