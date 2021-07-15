@@ -3,7 +3,13 @@
   "version": "0.0.46",
   "description": "Web Component Base Class",
   "main": "lib/wafer.js",
+  "keywords": [
+    "webcomponents",
+    "web-components",
+    "web components"
+  ],
   "exports": "./lib/wafer.js",
+  "types": "./lib/wafer.d.ts",
   "type": "module",
   "sideEffects": false,
   "files": [
