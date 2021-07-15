@@ -5,7 +5,7 @@ import { WaferServer as Wafer } from "../../../src/server/wafer.js";
 
 describe("WaferServer behaviour on instantiation", () => {
   it(`should update even if not connected`, async () => {
-    class Test0 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -16,9 +16,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test0}
+     * @type {Test}
      */
-    const el = new Test0({ tagName: "wafer-test-0" });
+    const el = new Test({ tagName: "wafer-test-0" });
     await el.construct();
 
     const spyChanged = sinon.spy(el, "changed");
@@ -55,7 +55,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it(`should update reflected property when attribute changes`, async () => {
-    class Test1 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -66,9 +66,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test1}
+     * @type {Test}
      */
-    const el = new Test1({ tagName: "wafer-test-1" });
+    const el = new Test({ tagName: "wafer-test-1" });
     await el.construct();
     await el.connectedCallback();
 
@@ -98,7 +98,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it(`should update un-reflected property when attribute changes`, async () => {
-    class Test2 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -108,9 +108,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test2}
+     * @type {Test}
      */
-    const el = new Test2({ tagName: "wafer-test-2" });
+    const el = new Test({ tagName: "wafer-test-2" });
     await el.construct();
     await el.connectedCallback();
 
@@ -140,7 +140,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it(`should reflect un-reflected property to attribute (server always reflect attributes as they are the source of truth in ssr)`, async () => {
-    class Test3 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -150,9 +150,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test3}
+     * @type {Test}
      */
-    const el = new Test3({ tagName: "wafer-test-3" });
+    const el = new Test({ tagName: "wafer-test-3" });
     await el.construct();
     await el.connectedCallback();
 
@@ -182,7 +182,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it(`should not call _setFromAttribute when attribute is set to existing value when connected`, async () => {
-    class Test4 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -192,9 +192,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test4}
+     * @type {Test}
      */
-    const el = new Test4({ tagName: "wafer-test-4" });
+    const el = new Test({ tagName: "wafer-test-4" });
     await el.construct();
     await el.connectedCallback();
 
@@ -214,7 +214,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it(`should not call _setFromAttribute when not connected`, async () => {
-    class Test5 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -224,9 +224,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test5}
+     * @type {Test}
      */
-    const el = new Test5({ tagName: "wafer-test-5" });
+    const el = new Test({ tagName: "wafer-test-5" });
     await el.construct();
 
     const spySetFromAttribute = sinon.spy(el, "_setFromAttribute");
@@ -245,7 +245,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should use initial value set before upgraded", async () => {
-    class Test6 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -255,9 +255,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test6}
+     * @type {Test}
      */
-    const el = new Test6({ tagName: "wafer-test-6" });
+    const el = new Test({ tagName: "wafer-test-6" });
     el.test = "bar";
 
     await el.construct();
@@ -268,7 +268,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should not call changed/updated when prop is changed to a new value then back to the old one", async () => {
-    class Test7 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -278,9 +278,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test7}
+     * @type {Test}
      */
-    const el = new Test7({ tagName: "wafer-test-7" });
+    const el = new Test({ tagName: "wafer-test-7" });
     await el.construct();
     await el.connectedCallback();
 
@@ -299,7 +299,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should not call changed/updated when prop is changed to the same value twice", async () => {
-    class Test8 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -309,9 +309,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test8}
+     * @type {Test}
      */
-    const el = new Test8({ tagName: "wafer-test-8" });
+    const el = new Test({ tagName: "wafer-test-8" });
     await el.construct();
     await el.connectedCallback();
 
@@ -330,7 +330,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should set prop to null if attribute removed", async () => {
-    class Test9 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -341,9 +341,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test9}
+     * @type {Test}
      */
-    const el = new Test9({ tagName: "wafer-test-9" });
+    const el = new Test({ tagName: "wafer-test-9" });
     await el.construct();
     await el.connectedCallback();
 
@@ -361,7 +361,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should remove attribute when non boolean prop set to null", async () => {
-    class Test10 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -372,9 +372,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test10}
+     * @type {Test}
      */
-    const el = new Test10({ tagName: "wafer-test-10" });
+    const el = new Test({ tagName: "wafer-test-10" });
     await el.construct();
     await el.connectedCallback();
 
@@ -395,7 +395,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should remove attribute when boolean prop set to null", async () => {
-    class Test11 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: Boolean,
@@ -406,9 +406,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test11}
+     * @type {Test}
      */
-    const el = new Test11({ tagName: "wafer-test-11" });
+    const el = new Test({ tagName: "wafer-test-11" });
     await el.construct();
     await el.connectedCallback();
 
@@ -429,7 +429,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should remove attribute when boolean prop set to false", async () => {
-    class Test12 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: Boolean,
@@ -440,9 +440,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test12}
+     * @type {Test}
      */
-    const el = new Test12({ tagName: "wafer-test-12" });
+    const el = new Test({ tagName: "wafer-test-12" });
     await el.construct();
     await el.connectedCallback();
 
@@ -463,7 +463,7 @@ describe("WaferServer behaviour on instantiation", () => {
   });
 
   it("should use initial value set before connected", async () => {
-    class Test13 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -473,9 +473,9 @@ describe("WaferServer behaviour on instantiation", () => {
     }
 
     /**
-     * @type {Test13}
+     * @type {Test}
      */
-    const el = new Test13({ tagName: "wafer-test-13" });
+    const el = new Test({ tagName: "wafer-test-13" });
     await el.construct();
 
     el.test = "bar";

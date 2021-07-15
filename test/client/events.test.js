@@ -5,7 +5,7 @@ import { Wafer } from "../../src/wafer.js";
 
 describe("Wafer handles events", () => {
   it("binds events to element by default in Shadow DOM", async () => {
-    class Test0 extends Wafer {
+    class Test extends Wafer {
       static template = "<button>Click me</button>";
       static props = {
         count: {
@@ -24,10 +24,10 @@ describe("Wafer handles events", () => {
         };
       }
     }
-    customElements.define("wafer-test-0", Test0);
+    customElements.define("wafer-test-0", Test);
 
     /**
-     * @type {Test0}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-0></wafer-test-0>");
     const button = el.shadowRoot.querySelector("button");
@@ -48,7 +48,7 @@ describe("Wafer handles events", () => {
   });
 
   it("binds events to element by default in light DOM", async () => {
-    class Test1 extends Wafer {
+    class Test extends Wafer {
       static template = "<button>Click me</button>";
       static props = {
         count: {
@@ -71,10 +71,10 @@ describe("Wafer handles events", () => {
         };
       }
     }
-    customElements.define("wafer-test-1", Test1);
+    customElements.define("wafer-test-1", Test);
 
     /**
-     * @type {Test1}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-1></wafer-test-1>");
     const button = el.querySelector("button");
@@ -95,7 +95,7 @@ describe("Wafer handles events", () => {
   });
 
   it("can pass event options", async () => {
-    class Test2 extends Wafer {
+    class Test extends Wafer {
       static template = "<button>Click me</button>";
       static props = {
         count: {
@@ -119,10 +119,10 @@ describe("Wafer handles events", () => {
         };
       }
     }
-    customElements.define("wafer-test-2", Test2);
+    customElements.define("wafer-test-2", Test);
 
     /**
-     * @type {Test2}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-2></wafer-test-2>");
     const button = el.shadowRoot.querySelector("button");

@@ -5,7 +5,7 @@ import { WaferServer as Wafer } from "../../src/server/wafer.js";
 
 describe("Wafer update/changed calls", () => {
   it(`should call changed once, updated once when one prop changes (not connected to DOM)`, async () => {
-    class Test0 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -16,9 +16,9 @@ describe("Wafer update/changed calls", () => {
     }
 
     /**
-     * @type {Test0}
+     * @type {Test}
      */
-    const el = new Test0({ tagName: "wafer-test-0" });
+    const el = new Test({ tagName: "wafer-test-0" });
     await el.construct();
 
     const spyChanged = sinon.spy(el, "changed");
@@ -49,7 +49,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should call changed once, updated once when prop changes twice in same tick`, async () => {
-    class Test1 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -60,9 +60,9 @@ describe("Wafer update/changed calls", () => {
     }
 
     /**
-     * @type {Test1}
+     * @type {Test}
      */
-    const el = new Test1({ tagName: "wafer-test-1" });
+    const el = new Test({ tagName: "wafer-test-1" });
     await el.construct();
     await el.connectedCallback();
 
@@ -93,7 +93,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should call changed twice, updated once when prop changes in response to changed prop`, async () => {
-    class Test2 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -110,9 +110,9 @@ describe("Wafer update/changed calls", () => {
     }
 
     /**
-     * @type {Test2}
+     * @type {Test}
      */
-    const el = new Test2({ tagName: "wafer-test-2" });
+    const el = new Test({ tagName: "wafer-test-2" });
     await el.construct();
     await el.connectedCallback();
 
@@ -146,7 +146,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should not call changed/updated if prop changes result in original value`, async () => {
-    class Test3 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -157,9 +157,9 @@ describe("Wafer update/changed calls", () => {
     }
 
     /**
-     * @type {Test3}
+     * @type {Test}
      */
-    const el = new Test3({ tagName: "wafer-test-3" });
+    const el = new Test({ tagName: "wafer-test-3" });
     await el.construct();
     await el.connectedCallback();
 
@@ -181,7 +181,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should call changed/updated once then changed/updated once again if prop changes in updated`, async () => {
-    class Test4 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -198,9 +198,9 @@ describe("Wafer update/changed calls", () => {
     }
 
     /**
-     * @type {Test4}
+     * @type {Test}
      */
-    const el = new Test4({ tagName: "wafer-test-4" });
+    const el = new Test({ tagName: "wafer-test-4" });
     await el.construct();
     await el.connectedCallback();
 
@@ -238,7 +238,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should not update if prop name returned from changed`, async () => {
-    class Test5 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -253,9 +253,9 @@ describe("Wafer update/changed calls", () => {
     }
 
     /**
-     * @type {Test5}
+     * @type {Test}
      */
-    const el = new Test5({ tagName: "wafer-test-5" });
+    const el = new Test({ tagName: "wafer-test-5" });
     await el.construct();
     await el.connectedCallback();
 
@@ -280,7 +280,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should trigger declared triggers on prop change`, async () => {
-    class Test6 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -297,9 +297,9 @@ describe("Wafer update/changed calls", () => {
     }
 
     /**
-     * @type {Test6}
+     * @type {Test}
      */
-    const el = new Test6({ tagName: "wafer-test-6" });
+    const el = new Test({ tagName: "wafer-test-6" });
     await el.construct();
     await el.connectedCallback();
 

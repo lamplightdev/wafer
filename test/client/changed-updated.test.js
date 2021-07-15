@@ -5,7 +5,7 @@ import { Wafer } from "../../src/wafer.js";
 
 describe("Wafer update/changed calls", () => {
   it(`should call changed once, updated once when one prop changes (not connected to DOM)`, async () => {
-    class Test0 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -14,12 +14,12 @@ describe("Wafer update/changed calls", () => {
         },
       };
     }
-    customElements.define(`wafer-test-0`, Test0);
+    customElements.define(`wafer-test-0`, Test);
 
     /**
-     * @type {Test0}
+     * @type {Test}
      */
-    const el = new Test0();
+    const el = new Test();
 
     const spyChanged = sinon.spy(el, "changed");
     const spyUpdated = sinon.spy(el, "updated");
@@ -49,7 +49,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should call changed once, updated once when prop changes twice in same tick`, async () => {
-    class Test1 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -58,12 +58,12 @@ describe("Wafer update/changed calls", () => {
         },
       };
     }
-    customElements.define(`wafer-test-1`, Test1);
+    customElements.define(`wafer-test-1`, Test);
 
     /**
-     * @type {Test1}
+     * @type {Test}
      */
-    const el = new Test1();
+    const el = new Test();
     document.body.append(el);
     await el.updateDone();
 
@@ -94,7 +94,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should call changed twice, updated once when prop changes in response to changed prop`, async () => {
-    class Test2 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -109,12 +109,12 @@ describe("Wafer update/changed calls", () => {
         }
       }
     }
-    customElements.define(`wafer-test-2`, Test2);
+    customElements.define(`wafer-test-2`, Test);
 
     /**
-     * @type {Test2}
+     * @type {Test}
      */
-    const el = new Test2();
+    const el = new Test();
     document.body.append(el);
     await el.updateDone();
 
@@ -148,7 +148,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should not call changed/updated if prop changes result in original value`, async () => {
-    class Test3 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -157,12 +157,12 @@ describe("Wafer update/changed calls", () => {
         },
       };
     }
-    customElements.define(`wafer-test-3`, Test3);
+    customElements.define(`wafer-test-3`, Test);
 
     /**
-     * @type {Test3}
+     * @type {Test}
      */
-    const el = new Test3();
+    const el = new Test();
     document.body.append(el);
     await el.updateDone();
 
@@ -184,7 +184,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should call changed/updated twice if prop changes in updated`, async () => {
-    class Test4 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -199,12 +199,12 @@ describe("Wafer update/changed calls", () => {
         }
       }
     }
-    customElements.define(`wafer-test-4`, Test4);
+    customElements.define(`wafer-test-4`, Test);
 
     /**
-     * @type {Test4}
+     * @type {Test}
      */
-    const el = new Test4();
+    const el = new Test();
     document.body.append(el);
     await el.updateDone();
 
@@ -242,7 +242,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should not update if prop name returned from changed`, async () => {
-    class Test5 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -255,12 +255,12 @@ describe("Wafer update/changed calls", () => {
         return ["test"];
       }
     }
-    customElements.define(`wafer-test-5`, Test5);
+    customElements.define(`wafer-test-5`, Test);
 
     /**
-     * @type {Test5}
+     * @type {Test}
      */
-    const el = new Test5();
+    const el = new Test();
     document.body.append(el);
     await el.updateDone();
 
@@ -285,7 +285,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should trigger declared triggers on prop change`, async () => {
-    class Test6 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -300,12 +300,12 @@ describe("Wafer update/changed calls", () => {
         },
       };
     }
-    customElements.define(`wafer-test-6`, Test6);
+    customElements.define(`wafer-test-6`, Test);
 
     /**
-     * @type {Test6}
+     * @type {Test}
      */
-    const el = new Test6();
+    const el = new Test();
     document.body.append(el);
     await el.updateDone();
 
@@ -342,7 +342,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should do nothing on requestUpdate(null)`, async () => {
-    class Test7 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -351,12 +351,12 @@ describe("Wafer update/changed calls", () => {
         },
       };
     }
-    customElements.define(`wafer-test-7`, Test7);
+    customElements.define(`wafer-test-7`, Test);
 
     /**
-     * @type {Test7}
+     * @type {Test}
      */
-    const el = new Test7();
+    const el = new Test();
     document.body.append(el);
 
     el.test = "bar";
@@ -377,7 +377,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should force update on default requestUpdate`, async () => {
-    class Test8 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -391,12 +391,12 @@ describe("Wafer update/changed calls", () => {
         },
       };
     }
-    customElements.define(`wafer-test-8`, Test8);
+    customElements.define(`wafer-test-8`, Test);
 
     /**
-     * @type {Test8}
+     * @type {Test}
      */
-    const el = new Test8();
+    const el = new Test();
     document.body.append(el);
 
     el.test = "bar";
@@ -435,7 +435,7 @@ describe("Wafer update/changed calls", () => {
   });
 
   it(`should force update with passed prop only on requestUpdate`, async () => {
-    class Test9 extends Wafer {
+    class Test extends Wafer {
       static props = {
         test: {
           type: String,
@@ -449,12 +449,12 @@ describe("Wafer update/changed calls", () => {
         },
       };
     }
-    customElements.define(`wafer-test-9`, Test9);
+    customElements.define(`wafer-test-9`, Test);
 
     /**
-     * @type {Test9}
+     * @type {Test}
      */
-    const el = new Test9();
+    const el = new Test();
     document.body.append(el);
 
     el.test = "bar";

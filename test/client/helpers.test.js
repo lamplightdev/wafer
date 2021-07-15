@@ -6,7 +6,7 @@ import { emit, repeat } from "../../src/dom.js";
 
 describe("Wafer DOM", () => {
   it("emit fires custom events with defaults", async () => {
-    class Test0 extends Wafer {
+    class Test extends Wafer {
       static template = "<button>Click me</button>";
       static props = {
         count: {
@@ -25,10 +25,10 @@ describe("Wafer DOM", () => {
         };
       }
     }
-    customElements.define("wafer-test-0", Test0);
+    customElements.define("wafer-test-0", Test);
 
     /**
-     * @type {Test0}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-0></wafer-test-0>");
     const button = el.shadowRoot.querySelector("button");
@@ -45,7 +45,7 @@ describe("Wafer DOM", () => {
   });
 
   it("emit fires custom events with parameters", async () => {
-    class Test1 extends Wafer {
+    class Test extends Wafer {
       static template = "<button>Click me</button>";
       static props = {
         count: {
@@ -72,10 +72,10 @@ describe("Wafer DOM", () => {
         };
       }
     }
-    customElements.define("wafer-test-1", Test1);
+    customElements.define("wafer-test-1", Test);
 
     /**
-     * @type {Test1}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-1></wafer-test-1>");
     const button = el.shadowRoot.querySelector("button");
@@ -92,7 +92,7 @@ describe("Wafer DOM", () => {
   });
 
   it("can render elements in container with repeat", async () => {
-    class Test2 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         items: {
@@ -120,10 +120,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-2", Test2);
+    customElements.define("wafer-test-2", Test);
 
     /**
-     * @type {Test2}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-2></wafer-test-2>");
 
@@ -137,7 +137,7 @@ describe("Wafer DOM", () => {
   });
 
   it("can remove elements in container with repeat", async () => {
-    class Test3 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         items: {
@@ -165,10 +165,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-3", Test3);
+    customElements.define("wafer-test-3", Test);
 
     /**
-     * @type {Test3}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-3></wafer-test-3>");
 
@@ -193,7 +193,7 @@ describe("Wafer DOM", () => {
   });
 
   it("can update elements in container with repeat", async () => {
-    class Test4 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         items: {
@@ -221,10 +221,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-4", Test4);
+    customElements.define("wafer-test-4", Test);
 
     /**
-     * @type {Test4}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-4></wafer-test-4>");
 
@@ -268,7 +268,7 @@ describe("Wafer DOM", () => {
   });
 
   it("can add new elements in container with repeat", async () => {
-    class Test5 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         items: {
@@ -296,10 +296,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-5", Test5);
+    customElements.define("wafer-test-5", Test);
 
     /**
-     * @type {Test5}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-5></wafer-test-5>");
 
@@ -326,7 +326,7 @@ describe("Wafer DOM", () => {
   });
 
   it("can bind events to elements in repeat", async () => {
-    class Test6 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         count: {
@@ -363,10 +363,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-6", Test6);
+    customElements.define("wafer-test-6", Test);
 
     /**
-     * @type {Test6}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-6></wafer-test-6>");
 
@@ -387,7 +387,7 @@ describe("Wafer DOM", () => {
   });
 
   it("runs init function only when adding element", async () => {
-    class Test7 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         items: {
@@ -420,10 +420,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-7", Test7);
+    customElements.define("wafer-test-7", Test);
 
     /**
-     * @type {Test7}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-7></wafer-test-7>");
 
@@ -451,7 +451,7 @@ describe("Wafer DOM", () => {
   });
 
   it("can re-add elements in container with repeat", async () => {
-    class Test8 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         items: {
@@ -479,10 +479,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-8", Test8);
+    customElements.define("wafer-test-8", Test);
 
     /**
-     * @type {Test8}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-8></wafer-test-8>");
 
@@ -522,7 +522,7 @@ describe("Wafer DOM", () => {
     const middle = start.sort((a, b) => b - a).slice(2, 4);
     const end = [5, 9, 33, 22, 12, 134, 1, 99, 53, 45, 77, 8];
 
-    class Test9 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
       static props = {
         items: {
@@ -550,10 +550,10 @@ describe("Wafer DOM", () => {
         },
       };
     }
-    customElements.define("wafer-test-9", Test9);
+    customElements.define("wafer-test-9", Test);
 
     /**
-     * @type {Test9}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-9></wafer-test-9>");
 

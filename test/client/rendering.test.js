@@ -5,13 +5,13 @@ import { Wafer } from "../../src/wafer.js";
 
 describe("Wafer renders expected content", () => {
   it("renders in shadow DOM", async () => {
-    class Test0 extends Wafer {
+    class Test extends Wafer {
       static template = "<h1>Test</h1>";
     }
-    customElements.define("wafer-test-0", Test0);
+    customElements.define("wafer-test-0", Test);
 
     /**
-     * @type {Test0}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-0></wafer-test-0>");
 
@@ -21,17 +21,17 @@ describe("Wafer renders expected content", () => {
   });
 
   it("renders in light DOM", async () => {
-    class Test1 extends Wafer {
+    class Test extends Wafer {
       static template = "<h1>Test</h1>";
 
       constructor() {
         super({ shadow: false });
       }
     }
-    customElements.define("wafer-test-1", Test1);
+    customElements.define("wafer-test-1", Test);
 
     /**
-     * @type {Test1}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-1></wafer-test-1>");
 
@@ -41,13 +41,13 @@ describe("Wafer renders expected content", () => {
   });
 
   it("renders slots", async () => {
-    class Test2 extends Wafer {
+    class Test extends Wafer {
       static template = "<h1>Hi <slot></slot></h1>";
     }
-    customElements.define("wafer-test-2", Test2);
+    customElements.define("wafer-test-2", Test);
 
     /**
-     * @type {Test2}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-2><span>Chris</span></wafer-test-2>");
 
@@ -57,7 +57,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM text in shadow DOM", async () => {
-    class Test3 extends Wafer {
+    class Test extends Wafer {
       static template = '<h1>Hi <span id="name"></span></h1>';
       static props = {
         name: {
@@ -72,10 +72,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-3", Test3);
+    customElements.define("wafer-test-3", Test);
 
     /**
-     * @type {Test3}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-3 name="Chris"></wafer-test-3>');
 
@@ -85,7 +85,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM text in light DOM", async () => {
-    class Test4 extends Wafer {
+    class Test extends Wafer {
       static template = "";
       static props = {
         name: {
@@ -100,10 +100,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-4", Test4);
+    customElements.define("wafer-test-4", Test);
 
     /**
-     * @type {Test4}
+     * @type {Test}
      */
     const el = await fixture(
       '<wafer-test-4 name="Chris"><span id="name"></span></wafer-test-4>'
@@ -117,7 +117,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM property in shadow DOM", async () => {
-    class Test5 extends Wafer {
+    class Test extends Wafer {
       static template = '<input type="checkbox">';
       static props = {
         on: {
@@ -132,10 +132,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-5", Test5);
+    customElements.define("wafer-test-5", Test);
 
     /**
-     * @type {Test5}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-5 on></wafer-test-5>");
 
@@ -147,7 +147,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM property in light DOM", async () => {
-    class Test6 extends Wafer {
+    class Test extends Wafer {
       static template = '<input type="checkbox">';
       static props = {
         on: {
@@ -166,10 +166,10 @@ describe("Wafer renders expected content", () => {
         super({ shadow: false });
       }
     }
-    customElements.define("wafer-test-6", Test6);
+    customElements.define("wafer-test-6", Test);
 
     /**
-     * @type {Test6}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-6 on></wafer-test-6>");
 
@@ -183,7 +183,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM attribute in shadow DOM", async () => {
-    class Test7 extends Wafer {
+    class Test extends Wafer {
       static template = '<input type="checkbox">';
       static props = {
         on: {
@@ -198,10 +198,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-7", Test7);
+    customElements.define("wafer-test-7", Test);
 
     /**
-     * @type {Test7}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-7 on></wafer-test-7>");
 
@@ -215,7 +215,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM property in light DOM", async () => {
-    class Test8 extends Wafer {
+    class Test extends Wafer {
       static template = '<input type="checkbox">';
       static props = {
         on: {
@@ -234,10 +234,10 @@ describe("Wafer renders expected content", () => {
         super({ shadow: false });
       }
     }
-    customElements.define("wafer-test-8", Test8);
+    customElements.define("wafer-test-8", Test);
 
     /**
-     * @type {Test8}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-8 on></wafer-test-8>");
 
@@ -251,7 +251,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("uses custom value in shadow DOM", async () => {
-    class Test9 extends Wafer {
+    class Test extends Wafer {
       static template = "<div>test</div>";
       static props = {
         test: {
@@ -267,10 +267,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-9", Test9);
+    customElements.define("wafer-test-9", Test);
 
     /**
-     * @type {Test9}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-9 test="foo"></wafer-test-9>');
 
@@ -283,7 +283,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("uses custom value in light DOM", async () => {
-    class Test10 extends Wafer {
+    class Test extends Wafer {
       static template = "<div>test</div>";
       static props = {
         test: {
@@ -303,10 +303,10 @@ describe("Wafer renders expected content", () => {
         super({ shadow: false });
       }
     }
-    customElements.define("wafer-test-10", Test10);
+    customElements.define("wafer-test-10", Test);
 
     /**
-     * @type {Test10}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-10 test="foo"></wafer-test-10>');
 
@@ -321,7 +321,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM in shadow DOM", async () => {
-    class Test11 extends Wafer {
+    class Test extends Wafer {
       static template = "<div>test</div>";
       static props = {
         test: {
@@ -340,10 +340,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-11", Test11);
+    customElements.define("wafer-test-11", Test);
 
     /**
-     * @type {Test11}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-11 test="foo"></wafer-test-11>');
 
@@ -353,7 +353,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("updates DOM in light DOM", async () => {
-    class Test12 extends Wafer {
+    class Test extends Wafer {
       static template = "<div>test</div>";
       static props = {
         test: {
@@ -376,10 +376,10 @@ describe("Wafer renders expected content", () => {
         super({ shadow: false });
       }
     }
-    customElements.define("wafer-test-12", Test12);
+    customElements.define("wafer-test-12", Test);
 
     /**
-     * @type {Test12}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-12 test="foo"></wafer-test-12>');
 
@@ -391,7 +391,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("can use a function for selector", async () => {
-    class Test13 extends Wafer {
+    class Test extends Wafer {
       static template = `
         <div id="item-1">1</div>
         <div id="item-2">2</div>
@@ -410,10 +410,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-13", Test13);
+    customElements.define("wafer-test-13", Test);
 
     /**
-     * @type {Test13}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-13 active="3"></wafer-test-13>');
 
@@ -427,7 +427,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("can use self as selector", async () => {
-    class Test14 extends Wafer {
+    class Test extends Wafer {
       static props = {
         active: {
           type: Number,
@@ -441,10 +441,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-14", Test14);
+    customElements.define("wafer-test-14", Test);
 
     /**
-     * @type {Test14}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-14 active="3"></wafer-test-14>');
 
@@ -452,7 +452,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("will remove attribute if selecting attribute with null", async () => {
-    class Test15 extends Wafer {
+    class Test extends Wafer {
       static template = '<div test="blah"></div>';
       static props = {
         active: {
@@ -467,10 +467,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-15", Test15);
+    customElements.define("wafer-test-15", Test);
 
     /**
-     * @type {Test15}
+     * @type {Test}
      */
     const el = await fixture('<wafer-test-15 active="3"></wafer-test-15>');
     const div = el.shadowRoot.querySelector("div");
@@ -484,7 +484,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("will update elements outside component", async () => {
-    class Test16 extends Wafer {
+    class Test extends Wafer {
       static props = {
         title: {
           type: String,
@@ -497,10 +497,10 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-16", Test16);
+    customElements.define("wafer-test-16", Test);
 
     /**
-     * @type {Test16}
+     * @type {Test}
      */
     const el = await fixture("<wafer-test-16></wafer-test-16>");
 
@@ -515,7 +515,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("will attach shadow root in browsers without DSD support when server rendered", async () => {
-    class Test17 extends Wafer {
+    class Test extends Wafer {
       static props = {
         title: {
           type: String,
@@ -528,10 +528,10 @@ describe("Wafer renders expected content", () => {
       }
     }
 
-    customElements.define("wafer-test-17", Test17);
+    customElements.define("wafer-test-17", Test);
 
     /**
-     * @type {Test17}
+     * @type {Test}
      */
     const el = await fixture(`
       <wafer-test-17 wafer-ssr>
@@ -548,14 +548,14 @@ describe("Wafer renders expected content", () => {
   });
 
   it("will attach shadow root in browsers with DSD support when server rendered", async () => {
-    class Test18 extends Wafer {
+    class Test extends Wafer {
       static props = {
         title: {
           type: String,
         },
       };
     }
-    customElements.define("wafer-test-18", Test18);
+    customElements.define("wafer-test-18", Test);
 
     // need to use this to get DSD parsed
     const parsedHTML = new DOMParser()
@@ -573,7 +573,7 @@ describe("Wafer renders expected content", () => {
       .querySelector("wafer-test-18");
 
     /**
-     * @type {Test18}
+     * @type {Test}
      */
     const el = await fixture(parsedHTML);
     await el.updateDone();
@@ -586,7 +586,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("will not call updateTargets on initialisation of SSR component (Shadow DOM)", async () => {
-    class Test19 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
 
       static props = {
@@ -601,7 +601,7 @@ describe("Wafer renders expected content", () => {
         },
       };
     }
-    customElements.define("wafer-test-19", Test19);
+    customElements.define("wafer-test-19", Test);
 
     // need to use this to get DSD parsed
     const parsedHTML = new DOMParser()
@@ -630,7 +630,7 @@ describe("Wafer renders expected content", () => {
     const spyUpdated = sinon.spy(node, "updated");
     const spyUpdateTargets = sinon.spy(node, "updateTargets");
     /**
-     * @type {Test19}
+     * @type {Test}
      */
     const el = await fixture(node);
     await el.updateDone();
@@ -645,7 +645,7 @@ describe("Wafer renders expected content", () => {
   });
 
   it("will not call updateTargets on initialisation of SSR component (Light DOM)", async () => {
-    class Test20 extends Wafer {
+    class Test extends Wafer {
       static template = "<div></div>";
 
       static props = {
@@ -664,7 +664,7 @@ describe("Wafer renders expected content", () => {
         super({ shadow: false });
       }
     }
-    customElements.define("wafer-test-20", Test20);
+    customElements.define("wafer-test-20", Test);
 
     // need to use this to get DSD parsed
     const parsedHTML = new DOMParser()
@@ -686,7 +686,7 @@ describe("Wafer renders expected content", () => {
     const spyUpdated = sinon.spy(node, "updated");
     const spyUpdateTargets = sinon.spy(node, "updateTargets");
     /**
-     * @type {Test20}
+     * @type {Test}
      */
     const el = await fixture(node);
     await el.updateDone();
