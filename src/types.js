@@ -18,6 +18,7 @@
  * @prop {boolean} [reflect=false] - Should the property be reflected to an attribute with the same name
  * @prop {Target[]} [targets=[]] - A list of targets that should be updated when the property value changes
  * @prop {string[]} [triggers=[]] - A list of other properties whose targets should be updated when this property changes
+ * @prop {string} [attributeName] - The name of the attribute this property can be initialised from / reflected to
  */
 
 /**

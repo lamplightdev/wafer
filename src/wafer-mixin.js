@@ -34,12 +34,14 @@ export const WaferMixin = (superclass) =>
 
     /**
      * A list of all attributes whose values should be used to set
-     * properties
+     * properties, using `attributeName` set in props if available
      *
      * @type {string[]}
      */
     static get observedAttributes() {
-      return Object.keys(this.props);
+      return Object.entries(this.props).map(([name, info]) => {
+        return info.attributeName || name;
+      });
     }
 
     /**
@@ -71,6 +73,18 @@ export const WaferMixin = (superclass) =>
        * @type {string[]}
        */
       this._propNames = Object.keys(this.props);
+
+      /**
+       * Object of attribute names to property names
+       *
+       * @type {Object.<string, string>}
+       */
+      this._attrToProp = {};
+
+      for (const propName of this._propNames) {
+        this._attrToProp[this.props[propName].attributeName || propName] =
+          propName;
+      }
 
       /**
        * Current values of properties
@@ -209,11 +223,17 @@ export const WaferMixin = (superclass) =>
           /**
            * No property has been set either before or after construction
            */
-          if (this.hasAttribute(name)) {
+
+          /**
+           * Get attribute name
+           */
+          const { attributeName = name } = this.props[name];
+
+          if (this.hasAttribute(attributeName)) {
             /**
              * Initialise from attribute value if there is one
              */
-            this._setFromAttribute(name, this.getAttribute(name));
+            this._setFromAttribute(name, this.getAttribute(attributeName));
 
             if (
               this._removeUnreflectedAttributes &&
@@ -221,7 +241,7 @@ export const WaferMixin = (superclass) =>
             ) {
               // remove any initial attribute set from server render if not reflected
               // and we don't need them for rehydration (since this is server only)
-              this.removeAttribute(name);
+              this.removeAttribute(attributeName);
             }
           } else {
             this[name] = this._initials[name];
@@ -284,7 +304,7 @@ export const WaferMixin = (superclass) =>
        * have been set to their correct values on the server
        */
       if (!this._needsRehydrating) {
-        const { type, reflect } = this.props[name];
+        const { type, reflect, attributeName = name } = this.props[name];
 
         /**
          * Don't update attribute if it's not reflected, nor if we are
@@ -298,21 +318,21 @@ export const WaferMixin = (superclass) =>
              * otherwise the attribute is removed
              */
             if ([null, false].includes(value)) {
-              if (this.hasAttribute(name)) {
-                this.removeAttribute(name);
+              if (this.hasAttribute(attributeName)) {
+                this.removeAttribute(attributeName);
               }
             } else {
-              this.setAttribute(name, "");
+              this.setAttribute(attributeName, "");
             }
           } else {
             if (value === null) {
-              this.removeAttribute(name);
+              this.removeAttribute(attributeName);
             } else {
               const valueString =
                 type !== Number && type !== String
                   ? JSON.stringify(value)
                   : value;
-              this.setAttribute(name, valueString);
+              this.setAttribute(attributeName, valueString);
             }
           }
         }
@@ -345,7 +365,7 @@ export const WaferMixin = (superclass) =>
         !this._changePromise &&
         oldValue !== newValue
       ) {
-        this._setFromAttribute(name, newValue);
+        this._setFromAttribute(this._attrToProp[name], newValue);
       }
     }
 

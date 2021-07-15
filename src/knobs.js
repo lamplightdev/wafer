@@ -272,9 +272,13 @@ class Knobs extends Wafer {
                       }
                     } else {
                       if (prop.type === Boolean) {
-                        input.checked = selfWafer.el.hasAttribute(name);
+                        input.checked = selfWafer.el.hasAttribute(
+                          prop.attributeName || name
+                        );
                       } else {
-                        input.value = selfWafer.el.getAttribute(name);
+                        input.value = selfWafer.el.getAttribute(
+                          prop.attributeName || name
+                        );
                       }
                     }
                   }
@@ -300,7 +304,8 @@ class Knobs extends Wafer {
                   {
                     selector: "$div.propname",
                     text: true,
-                    use: (prop) => prop.name,
+                    use: (prop) =>
+                      isProps ? prop.name : prop.attributeName || prop.name,
                   },
                   {
                     selector: "$div.propinfo",
@@ -328,7 +333,9 @@ class Knobs extends Wafer {
                           }
                         } else {
                           if (prop.reflect) {
-                            return selfWafer.el.getAttribute(prop.name);
+                            return selfWafer.el.getAttribute(
+                              prop.attributeName || prop.name
+                            );
                           }
                         }
                       }
@@ -343,7 +350,9 @@ class Knobs extends Wafer {
                           return selfWafer.el[prop.name] ? "" : null;
                         } else {
                           if (prop.reflect) {
-                            return selfWafer.el.hasAttribute(prop.name)
+                            return selfWafer.el.hasAttribute(
+                              prop.attributeName || prop.name
+                            )
                               ? ""
                               : null;
                           }
@@ -393,9 +402,14 @@ class Knobs extends Wafer {
                             selfWafer.el[name] = input.checked;
                           } else {
                             if (input.checked) {
-                              selfWafer.el.setAttribute(name, "");
+                              selfWafer.el.setAttribute(
+                                prop.attributeName || name,
+                                ""
+                              );
                             } else {
-                              selfWafer.el.removeAttribute(name);
+                              selfWafer.el.removeAttribute(
+                                prop.attributeName || name
+                              );
                             }
                           }
                         } else {
@@ -411,7 +425,10 @@ class Knobs extends Wafer {
                             }
                           } else {
                             const value = input.value.trim();
-                            selfWafer.el.setAttribute(name, value);
+                            selfWafer.el.setAttribute(
+                              prop.attributeName || name,
+                              value
+                            );
                           }
                         }
                       }
