@@ -1,6 +1,6 @@
 {
   "name": "@lamplightdev/wafer",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "Web Component Base Class",
   "main": "lib/wafer.js",
   "keywords": [
@@ -8,7 +8,13 @@
     "web-components",
     "web components"
   ],
-  "exports": "./lib/wafer.js",
+  "exports": {
+    ".": "./lib/wafer.js",
+    "./dom.js": "./lib/dom.js",
+    "./lib/": "./lib/",
+    "./server/": "./lib/server/",
+    "./lib/server/": "./lib/server/"
+  },
   "types": "./lib/wafer.d.ts",
   "type": "module",
   "sideEffects": false,
