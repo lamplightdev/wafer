@@ -394,6 +394,40 @@ describe("WaferServer behaviour on instantiation", () => {
     expect(el.getAttribute("test")).to.equal(undefined);
   });
 
+  it("should remove attribute when non boolean prop set to undefined", async () => {
+    class Test extends Wafer {
+      static props = {
+        test: {
+          type: String,
+          initial: "foo",
+          reflect: true,
+        },
+      };
+    }
+
+    /**
+     * @type {Test}
+     */
+    const el = new Test({ tagName: "wafer-test-10" });
+    await el.construct();
+    await el.connectedCallback();
+
+    const spyChanged = sinon.spy(el, "changed");
+    const spyUpdated = sinon.spy(el, "updated");
+
+    expect(el).attr("test").to.equal("foo");
+
+    el.test = undefined;
+
+    await el.updateDone();
+
+    expect(spyChanged).to.have.callCount(1);
+    expect(spyUpdated).to.have.callCount(1);
+
+    expect(el.test).to.equal(undefined);
+    expect(el.getAttribute("test")).to.equal(undefined);
+  });
+
   it("should remove attribute when boolean prop set to null", async () => {
     class Test extends Wafer {
       static props = {
@@ -425,6 +459,40 @@ describe("WaferServer behaviour on instantiation", () => {
     expect(spyUpdated).to.have.callCount(1);
 
     expect(el.test).to.equal(null);
+    expect(el.getAttribute("test")).to.equal(undefined);
+  });
+
+  it("should remove attribute when boolean prop set to undefined", async () => {
+    class Test extends Wafer {
+      static props = {
+        test: {
+          type: Boolean,
+          initial: true,
+          reflect: true,
+        },
+      };
+    }
+
+    /**
+     * @type {Test}
+     */
+    const el = new Test({ tagName: "wafer-test-11" });
+    await el.construct();
+    await el.connectedCallback();
+
+    const spyChanged = sinon.spy(el, "changed");
+    const spyUpdated = sinon.spy(el, "updated");
+
+    expect(el.getAttribute("test")).to.equal("");
+
+    el.test = undefined;
+
+    await el.updateDone();
+
+    expect(spyChanged).to.have.callCount(1);
+    expect(spyUpdated).to.have.callCount(1);
+
+    expect(el.test).to.equal(undefined);
     expect(el.getAttribute("test")).to.equal(undefined);
   });
 

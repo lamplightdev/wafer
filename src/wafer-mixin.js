@@ -317,7 +317,7 @@ export const WaferMixin = (superclass) =>
              * Any truthy value sets a Boolean attribute to the empty string,
              * otherwise the attribute is removed
              */
-            if ([null, false].includes(value)) {
+            if ([null, false, undefined].includes(value)) {
               if (this.hasAttribute(attributeName)) {
                 this.removeAttribute(attributeName);
               }
@@ -325,7 +325,7 @@ export const WaferMixin = (superclass) =>
               this.setAttribute(attributeName, "");
             }
           } else {
-            if (value === null) {
+            if ([null, undefined].includes(value)) {
               this.removeAttribute(attributeName);
             } else {
               const valueString =

@@ -384,6 +384,40 @@ describe("Wafer behaviour on instantiation", () => {
     expect(el).not.to.have.attr("test");
   });
 
+  it("should remove attribute when non boolean prop set to undefined", async () => {
+    class Test extends Wafer {
+      static props = {
+        test: {
+          type: String,
+          initial: "foo",
+          reflect: true,
+        },
+      };
+    }
+
+    customElements.define(`wafer-test-10a`, Test);
+
+    /**
+     * @type {Test}
+     */
+    const el = await fixture("<wafer-test-10a></wafer-test-10a>");
+
+    const spyChanged = sinon.spy(el, "changed");
+    const spyUpdated = sinon.spy(el, "updated");
+
+    expect(el).attr("test").to.equal("foo");
+
+    el.test = undefined;
+
+    await el.updateDone();
+
+    expect(spyChanged).to.have.callCount(1);
+    expect(spyUpdated).to.have.callCount(1);
+
+    expect(el.test).to.equal(undefined);
+    expect(el).not.to.have.attr("test");
+  });
+
   it("should remove attribute when boolean prop set to null", async () => {
     class Test extends Wafer {
       static props = {
@@ -415,6 +449,40 @@ describe("Wafer behaviour on instantiation", () => {
     expect(spyUpdated).to.have.callCount(1);
 
     expect(el.test).to.equal(null);
+    expect(el).not.to.have.attr("test");
+  });
+
+  it("should remove attribute when boolean prop set to undefined", async () => {
+    class Test extends Wafer {
+      static props = {
+        test: {
+          type: Boolean,
+          initial: true,
+          reflect: true,
+        },
+      };
+    }
+
+    customElements.define(`wafer-test-11a`, Test);
+
+    /**
+     * @type {Test}
+     */
+    const el = await fixture("<wafer-test-11></wafer-test-11>");
+
+    const spyChanged = sinon.spy(el, "changed");
+    const spyUpdated = sinon.spy(el, "updated");
+
+    expect(el).attr("test").to.equal("");
+
+    el.test = undefined;
+
+    await el.updateDone();
+
+    expect(spyChanged).to.have.callCount(1);
+    expect(spyUpdated).to.have.callCount(1);
+
+    expect(el.test).to.equal(undefined);
     expect(el).not.to.have.attr("test");
   });
 
