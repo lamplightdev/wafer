@@ -49,4 +49,44 @@ export default [
     ],
     plugins: [terser()],
   },
+
+  // CJS for node environments using CJS
+  {
+    input: "src/wafer.js",
+    output: {
+      file: "lib/wafer.cjs",
+      format: "cjs",
+    },
+  },
+  {
+    input: "src/dom.js",
+    output: {
+      file: "lib/dom.cjs",
+      format: "cjs",
+    },
+  },
+  {
+    input: "src/server/wafer.js",
+    output: {
+      file: "lib/server/wafer.cjs",
+      format: "cjs",
+    },
+    external: ["node-html-parser"],
+  },
+  {
+    input: "src/server/dom.js",
+    output: {
+      file: "lib/server/dom.cjs",
+      format: "cjs",
+    },
+    external: ["node-html-parser"],
+  },
+  {
+    input: "src/server/element.js",
+    output: {
+      file: "lib/server/element.cjs",
+      format: "cjs",
+    },
+    external: ["node-html-parser"],
+  },
 ];

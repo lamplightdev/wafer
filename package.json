@@ -1,22 +1,67 @@
 {
   "name": "@lamplightdev/wafer",
-  "version": "0.0.48",
+  "version": "0.0.49",
   "description": "Web Component Base Class",
-  "main": "lib/wafer.js",
   "keywords": [
     "webcomponents",
     "web-components",
     "web components"
   ],
+  "type": "module",
+  "main": "./lib/wafer.cjs",
+  "module": "./lib/wafer.js",
+  "unpkg": "./dist/wafer.js",
   "exports": {
-    ".": "./lib/wafer.js",
-    "./dom.js": "./lib/dom.js",
-    "./lib/": "./lib/",
-    "./server/": "./lib/server/",
-    "./lib/server/": "./lib/server/"
+    ".": {
+      "import": "./lib/wafer.js",
+      "default": "./lib/wafer.cjs"
+    },
+    "./dom": {
+      "import": "./lib/dom.js",
+      "default": "./lib/dom.cjs"
+    },
+    "./dom.js": {
+      "import": "./lib/dom.js",
+      "default": "./lib/dom.cjs"
+    },
+    "./server": {
+      "import": "./lib/server/wafer.js",
+      "default": "./lib/server/wafer.cjs"
+    },
+    "./lib/server/wafer": {
+      "import": "./lib/server/wafer.js",
+      "default": "./lib/server/wafer.cjs"
+    },
+    "./lib/server/wafer.js": {
+      "import": "./lib/server/wafer.js",
+      "default": "./lib/server/wafer.cjs"
+    },
+    "./server/dom": {
+      "import": "./lib/server/dom.js",
+      "default": "./lib/server/dom.cjs"
+    },
+    "./lib/server/dom": {
+      "import": "./lib/server/dom.js",
+      "default": "./lib/server/dom.cjs"
+    },
+    "./lib/server/dom.js": {
+      "import": "./lib/server/dom.js",
+      "default": "./lib/server/dom.cjs"
+    },
+    "./server/element": {
+      "import": "./lib/server/element.js",
+      "default": "./lib/server/element.cjs"
+    },
+    "./lib/server/element": {
+      "import": "./lib/server/element.js",
+      "default": "./lib/server/element.cjs"
+    },
+    "./lib/server/element.js": {
+      "import": "./lib/server/element.js",
+      "default": "./lib/server/element.cjs"
+    }
   },
   "types": "./lib/wafer.d.ts",
-  "type": "module",
   "sideEffects": false,
   "files": [
     "dist/**",

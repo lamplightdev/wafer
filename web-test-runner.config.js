@@ -1,10 +1,8 @@
-import { defaultReporter } from '@web/test-runner';
-
 export default {
   coverageConfig: {
-    reporters: ['html', 'text'],
+    reporters: ["html", "text"],
     report: true,
-    reportDir: 'coverage',
+    reportDir: "coverage",
 
     threshold: {
       statements: 70,
