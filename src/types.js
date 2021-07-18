@@ -8,7 +8,7 @@
  * @typedef { import("node-html-parser").Node } ParserNode
  * @typedef { import("node-html-parser").HTMLElement } ParserHTMLElement
  * @typedef { import("./server/element").ServerElement } ServerElement
- * @typedef { import("./server/wafer").WaferServer } WaferServer
+ * @typedef { import("./server/wafer").default } WaferServer
  */
 
 /**

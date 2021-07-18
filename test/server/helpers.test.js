@@ -1,7 +1,7 @@
 import { expect } from "../testing.js";
 import sinon from "sinon";
 
-import { WaferServer as Wafer } from "../../src/server/wafer.js";
+import Wafer from "../../src/server/wafer.js";
 import { repeat } from "../../src/server/dom.js";
 import { ServerElement, parse } from "../../src/server/element.js";
 

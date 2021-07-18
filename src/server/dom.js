@@ -80,7 +80,7 @@ const repeat = async ({
  * where we want all asynchronous updates can complete before the
  * response is sent
  *
- * @param {Element|import("./wafer").WaferServer} el
+ * @param {Element|import("./wafer").default} el
  * @param {string} selector
  * @param {(el: Element|import("./element").ServerElement) => void} func
  *

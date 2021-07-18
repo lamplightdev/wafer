@@ -1,7 +1,7 @@
 import { fixture, expect } from "@open-wc/testing";
 import sinon from "sinon";
 
-import { Wafer } from "../../../src/wafer.js";
+import Wafer from "../../../src/wafer.js";
 import configs from "../../configs.js";
 
 describe("Wafer sets attributes and properties on element when defined before DOM", () => {

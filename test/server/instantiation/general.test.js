@@ -1,7 +1,7 @@
 import { expect } from "../../testing.js";
 import sinon from "sinon";
 
-import { WaferServer as Wafer } from "../../../src/server/wafer.js";
+import Wafer from "../../../src/server/wafer.js";
 
 describe("WaferServer behaviour on instantiation", () => {
   it(`should update even if not connected`, async () => {

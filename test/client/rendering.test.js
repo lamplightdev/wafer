@@ -1,7 +1,7 @@
 import { fixture, expect } from "@open-wc/testing";
 import sinon, { assert } from "sinon";
 
-import { Wafer } from "../../src/wafer.js";
+import Wafer from "../../src/wafer.js";
 
 describe("Wafer renders expected content", () => {
   it("renders in shadow DOM", async () => {

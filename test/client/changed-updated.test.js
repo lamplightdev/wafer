@@ -1,7 +1,7 @@
 import { fixture, expect } from "@open-wc/testing";
 import sinon from "sinon";
 
-import { Wafer } from "../../src/wafer.js";
+import Wafer from "../../src/wafer.js";
 
 describe("Wafer update/changed calls", () => {
   it(`should call changed once, updated once when one prop changes (not connected to DOM)`, async () => {

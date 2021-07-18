@@ -9,7 +9,7 @@ import { ServerElement, parse } from "./element.js";
 import { updateTargets } from "../common.js";
 import { apply } from "./dom.js";
 
-export class WaferServer extends WaferMixin(ServerElement) {
+export default class WaferServer extends WaferMixin(ServerElement) {
   /**
    *
    * @param {import("../types").ServerOpts} opts

@@ -1,7 +1,7 @@
 import { fixture, expect, oneEvent } from "@open-wc/testing";
 import sinon from "sinon";
 
-import { Wafer } from "../../src/wafer.js";
+import Wafer from "../../src/wafer.js";
 import { emit, repeat } from "../../src/dom.js";
 
 describe("Wafer DOM", () => {

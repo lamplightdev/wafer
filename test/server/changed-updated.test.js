@@ -1,7 +1,7 @@
 import { expect } from "../testing.js";
 import sinon from "sinon";
 
-import { WaferServer as Wafer } from "../../src/server/wafer.js";
+import Wafer from "../../src/server/wafer.js";
 
 describe("Wafer update/changed calls", () => {
   it(`should call changed once, updated once when one prop changes (not connected to DOM)`, async () => {

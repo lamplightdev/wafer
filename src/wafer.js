@@ -8,7 +8,7 @@ import { WaferMixin } from "./wafer-mixin.js";
 import { stamp, apply, bindEvent } from "./dom.js";
 import { updateTargets } from "./common.js";
 
-class WaferClient extends WaferMixin(HTMLElement) {
+export default class WaferClient extends WaferMixin(HTMLElement) {
   /**
    * Does the current client context support Declarative Shadow DOM
    *
@@ -148,5 +148,3 @@ class WaferClient extends WaferMixin(HTMLElement) {
     });
   }
 }
-
-export { WaferClient as Wafer };

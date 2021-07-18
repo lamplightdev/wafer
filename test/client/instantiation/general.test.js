@@ -1,7 +1,7 @@
 import { fixture, expect } from "@open-wc/testing";
 import sinon from "sinon";
 
-import { Wafer } from "../../../src/wafer.js";
+import Wafer from "../../../src/wafer.js";
 
 describe("Wafer behaviour on instantiation", () => {
   it(`should update even if not connected`, async () => {

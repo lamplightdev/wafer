@@ -4,7 +4,7 @@
  * @module Knobs
  */
 
-import { Wafer } from "./wafer.js";
+import Wafer from "./wafer.js";
 import { repeat } from "./dom.js";
 
 // define an no-op html function to get syntax highlighting in template strings

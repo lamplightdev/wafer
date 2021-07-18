@@ -1,7 +1,7 @@
 import { expect } from "../../testing.js";
 import sinon from "sinon";
 
-import { WaferServer as Wafer } from "../../../src/server/wafer.js";
+import Wafer from "../../../src/server/wafer.js";
 import configs from "../../configs.js";
 
 describe("Wafer sets attributes and properties on element when defined as object", () => {
