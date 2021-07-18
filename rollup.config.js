@@ -12,8 +12,7 @@ export default [
       {
         file: "dist/wafer.browser.js",
         format: "iife",
-        name: "window",
-        extend: true,
+        name: "Wafer",
       },
     ],
     plugins: [terser()],
@@ -56,6 +55,7 @@ export default [
     output: {
       file: "lib/wafer.cjs",
       format: "cjs",
+      exports: "default",
     },
   },
   {
@@ -70,6 +70,7 @@ export default [
     output: {
       file: "lib/server/wafer.cjs",
       format: "cjs",
+      exports: "default",
     },
     external: ["node-html-parser"],
   },
