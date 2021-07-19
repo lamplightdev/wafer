@@ -69,7 +69,11 @@ const repeat = async ({
     /**
      * Add element into container
      */
-    container.appendChild(el._element);
+    container.appendChild(
+      /** @type {import("node-html-parser").Node} **/ (
+        /** @type {unknown} **/ (el._element)
+      )
+    );
   }
 };
 

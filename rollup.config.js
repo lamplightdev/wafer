@@ -72,7 +72,7 @@ export default [
       format: "cjs",
       exports: "default",
     },
-    external: ["node-html-parser"],
+    external: ["node-html-parser", "module"],
   },
   {
     input: "src/server/dom.js",
@@ -80,7 +80,7 @@ export default [
       file: "lib/server/dom.cjs",
       format: "cjs",
     },
-    external: ["node-html-parser"],
+    external: ["node-html-parser", "module"],
   },
   {
     input: "src/server/element.js",
@@ -88,6 +88,6 @@ export default [
       file: "lib/server/element.cjs",
       format: "cjs",
     },
-    external: ["node-html-parser"],
+    external: ["node-html-parser", "module"],
   },
 ];

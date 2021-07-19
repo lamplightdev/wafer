@@ -4,9 +4,10 @@
  * @module ServerElement
  */
 
-import pkg from "node-html-parser";
-// @ts-ignore
-const { parse, HTMLElement } = pkg;
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+const { parse, HTMLElement } = require("node-html-parser");
 
 /**
  * Provides an interface compatible with the browser `HTMLElement` - at least
@@ -29,7 +30,10 @@ class ServerElement {
      *
      * - make it easy to swap out for alternative implementations
      */
-    this._element = new HTMLElement(tagName, {});
+    this._element = /** @type { ServerElement} **/ (
+      /** @type { unknown } **/
+      (new HTMLElement(tagName, {}, "", null))
+    );
     this._element.setAttributes(attrs);
   }
 
@@ -82,6 +86,16 @@ class ServerElement {
   }
 
   /**
+   * Sets all attributes at once
+   *
+   * @param {object} attrs - Value to set
+   * @returns
+   */
+  setAttributes(attrs) {
+    this._element.setAttributes(attrs);
+  }
+
+  /**
    * Remove names attribute
    *
    * @param {string} key - Attribute name
@@ -94,7 +108,7 @@ class ServerElement {
    * Append a child to the underlying element implementation
    *
    * @param {ServerElement} el - Element to append
-   * @returns
+   * @returns {void}
    */
   appendChild(el) {
     return this._element.appendChild(el.getElement());
@@ -145,6 +159,15 @@ class ServerElement {
    */
   get firstChild() {
     return this._element.firstChild;
+  }
+
+  /**
+   * Set the child nodes of this element
+   *
+   * @returns
+   */
+  set childNodes(nodes) {
+    this._element.childNodes = nodes;
   }
 
   /**
@@ -225,7 +248,7 @@ class ServerElement {
  * Convert an instance of node-html-parser's HTMLElement into a ServerElement
  * instance
  *
- * @param {typeof HTMLElement} el - the HTMLElement instance
+ * @param {ServerElement} el - the HTMLElement instance
  * @param {import("../types").Registry} registry - registry of tag names to Wafer component definitions
  *
  * @returns {Promise<ServerElement>}
@@ -306,7 +329,9 @@ const waferParse = async (htmlString, registry = {}) => {
   /**
    * Parse string into a tree of `HTMLElement`s
    */
-  const tree = parse(htmlString);
+  const tree = /** @type {ServerElement} **/ (
+    /** @type {unknown} **/ (parse(htmlString))
+  );
 
   /**
    * Convert `HTMLElement` tree into a `ServerElement` tree
