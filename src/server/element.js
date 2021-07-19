@@ -242,6 +242,23 @@ class ServerElement {
   toString() {
     return this._element.toString();
   }
+
+  /**
+   * Promise resolves when all pending updates have been processed
+   *
+   * @param {import("../types").Registry} registry - registry of tag names to Wafer component definitions
+   *
+   * @returns {Promise<void>}
+   */
+  async updateDone(registry) {
+    for (const child of this.childNodes) {
+      await child.updateDone(registry);
+    }
+
+    if (registry[this.tagName?.toLowerCase()]) {
+      await this.updateDone(registry);
+    }
+  }
 }
 
 /**
@@ -339,4 +356,4 @@ const waferParse = async (htmlString, registry = {}) => {
   return convert(tree, registry);
 };
 
-export { ServerElement, convert, waferParse as parse };
+export { ServerElement, waferParse as parse };
