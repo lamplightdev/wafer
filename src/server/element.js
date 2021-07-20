@@ -255,7 +255,7 @@ class ServerElement {
       await child.updateDone(registry);
     }
 
-    if (registry[this.tagName?.toLowerCase()]) {
+    if (registry[this.tagName && this.tagName.toLowerCase()]) {
       await this.updateDone(registry);
     }
   }
