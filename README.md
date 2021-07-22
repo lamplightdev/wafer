@@ -29,7 +29,7 @@ Wafer is:
 
 ## Documentation
 
-To get started checkout how to [install Wafer](https://waferlib.netlify.app/docs/010-overview/020-installation/), read through a [quick guide](https://waferlib.netlify.app/docs/010-overview/030-quick/) outlining the basic concepts, or dive in to a [live example](https://waferlib.netlify.app/docs/010-overview/040-example/).
+Please visit the [documentation site](https://waferlib.netlify.app/). To get started checkout how to [install Wafer](https://waferlib.netlify.app/docs/010-overview/020-installation/), read through a [quick guide](https://waferlib.netlify.app/docs/010-overview/030-quick/) outlining the basic concepts, or dive in to a [live example](https://waferlib.netlify.app/docs/010-overview/040-example/).
 
 ## Installation
 
@@ -90,3 +90,11 @@ This will lint the code, create Typescript types from JSDoc comments, run tests 
 ## Contributing
 
 All contributions are welcome - please file an issue or submit a PR.
+
+## License
+
+The code is released under the [MIT license](./LICENSE.md).
+
+## Credits
+
+Wafer was created by Chris ([@lamplightdev](https://twitter.com/lamplightdev)) - say hi!
