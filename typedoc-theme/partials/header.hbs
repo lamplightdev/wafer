@@ -1,4 +1,22 @@
 <style>
+  @font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto; /* or block, swap, fallback, optional */
+  src: url("/fonts/AtkinsonHyperlegible-Regular.woff2") format("woff2");
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: bold;
+  font-weight: 700;
+  font-display: auto; /* or block, swap, fallback, optional */
+  src: url("/fonts/AtkinsonHyperlegible-Bold.woff2") format("woff2");
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
   .tsd-page-toolbar {
     height: 125px;
   }
@@ -25,6 +43,8 @@
     --color-bg-tint: hsla(0, 0%, 99%, 1);
     --color-lowlight: hsla(0, 0%, 22%, 0.1);
     --color-lowlowlight: hsla(0, 0%, 22%, 0.05);
+
+    font-family: 'Atkinson Hyperlegible', sans-serif;
 
     border-bottom: 1px solid var(--color-lowlight);
     background-color: var(--color-bg);
