@@ -1,4 +1,5 @@
 import { terser } from "rollup-plugin-terser";
+import filesize from "rollup-plugin-filesize";
 
 export default [
   {
@@ -15,7 +16,14 @@ export default [
         name: "Wafer",
       },
     ],
-    plugins: [terser()],
+    plugins: [
+      terser(),
+      filesize({
+        showBrotliSize: true,
+        showGzippedSize: true,
+        showMinifiedSize: true,
+      }),
+    ],
   },
   {
     input: "src/dom.js",
@@ -31,7 +39,14 @@ export default [
         name: "WaferDOM",
       },
     ],
-    plugins: [terser()],
+    plugins: [
+      terser(),
+      filesize({
+        showBrotliSize: true,
+        showGzippedSize: true,
+        showMinifiedSize: true,
+      }),
+    ],
   },
   {
     input: "src/knobs.js",
@@ -46,7 +61,14 @@ export default [
         format: "iife",
       },
     ],
-    plugins: [terser()],
+    plugins: [
+      terser(),
+      filesize({
+        showBrotliSize: true,
+        showGzippedSize: true,
+        showMinifiedSize: true,
+      }),
+    ],
   },
 
   // CJS for node environments using CJS
