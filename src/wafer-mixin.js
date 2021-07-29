@@ -95,12 +95,12 @@ export const WaferMixin = (superclass) =>
       this._props = {};
 
       /**
-       * Promise that will resolve when all the currently pending property
-       * changes have been processed
+       * Flag indicating pending property
+       * changes are being processed
        *
-       * @type {Promise<void> | null}
+       * @type {Boolean}
        */
-      this._changePromise = null;
+      this._changing = false;
 
       /**
        * Promise that will resolve when all the current updates
@@ -360,11 +360,7 @@ export const WaferMixin = (superclass) =>
        *
        * - the value hasn't changed
        */
-      if (
-        this._connectedOnce &&
-        !this._changePromise &&
-        oldValue !== newValue
-      ) {
+      if (this._connectedOnce && !this._changing && oldValue !== newValue) {
         this._setFromAttribute(this._attrToProp[name], newValue);
       }
     }
@@ -373,12 +369,9 @@ export const WaferMixin = (superclass) =>
      * Trigger an update to the component that will be run at the end
      * of the current task
      */
-    triggerUpdate() {
-      this._changePromise =
-        this._changePromise ||
-        Promise.resolve().then(() => {
-          return this.update(null);
-        });
+    async triggerUpdate() {
+      this._changing = true;
+      this.update(null);
     }
 
     /**
@@ -401,20 +394,24 @@ export const WaferMixin = (superclass) =>
      */
     update(props = []) {
       /**
-       * List of properties that have been manually requested to be updated
-       * irrespective of whether their values have changed
-       *
-       * @type {string[]}
-       */
-      const propNames = props ? (props.length ? props : this._propNames) : [];
-
-      /**
        * Promise that resolves when all targets in this cycle have been
        * applied
        **/
       this._updatePromise =
         this._updatePromise ||
         Promise.resolve().then(async () => {
+          /**
+           * List of properties that have been manually requested to be updated
+           * irrespective of whether their values have changed
+           *
+           * @type {string[]}
+           */
+          const propNames = props
+            ? props.length
+              ? props
+              : this._propNames
+            : [];
+
           /**
            * Map of property names whose value has changed (or was manually
            * requested) to their new (existing) values
@@ -590,7 +587,7 @@ export const WaferMixin = (superclass) =>
           /**
            * Indicate the current changes have all been processed
            */
-          this._changePromise = null;
+          this._changing = false;
 
           if (updated.size > 0) {
             /**
@@ -758,7 +755,6 @@ export const WaferMixin = (superclass) =>
      * @returns {Promise<void>}
      */
     async updateDone() {
-      await this._changePromise;
       await this._updatePromise;
     }
   };
