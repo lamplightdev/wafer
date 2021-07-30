@@ -338,4 +338,58 @@ describe("Wafer DOM", () => {
       </wafer-test>
     `);
   });
+
+  it("shouldn't choke on leaading whitespace in repeat html", async () => {
+    class Test extends Wafer {
+      static template = "<div></div>";
+      static props = {
+        items: {
+          type: Array,
+          initial: [1, 2, 3],
+          targets: [
+            {
+              selector: "$div",
+              dom: async (container, items) => {
+                await repeat({
+                  container,
+                  items,
+                  html: `
+                    <span></span>
+                  `,
+                  keyFn: (item) => item,
+                  targets: [
+                    {
+                      selector: "self",
+                      text: true,
+                    },
+                  ],
+                });
+              },
+            },
+          ],
+        },
+      };
+    }
+
+    const html = await parse(
+      `
+      <wafer-test></wafer-test>
+      `,
+      { "wafer-test": { def: Test } }
+    );
+
+    const el = html.querySelector("wafer-test");
+
+    expect(el.toString()).html.to.equal(
+      `<wafer-test items="[1,2,3]" wafer-ssr>
+        <template shadowroot="open">
+          <div>
+            <span wafer-key="1">1</span>
+            <span wafer-key="2">2</span>
+            <span wafer-key="3">3</span>
+          </div>
+        </template>
+      </wafer-test>`
+    );
+  });
 });

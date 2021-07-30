@@ -42,7 +42,7 @@ const repeat = async ({
      * template and extracting the first {@link ServerElement} instance
      */
     const el = /** @type {ServerElement[]} */ (
-      (await parse(html, registry)).childNodes
+      (await parse(html.trim(), registry)).childNodes
     ).filter((node) => node instanceof ServerElement)[0];
 
     /**
