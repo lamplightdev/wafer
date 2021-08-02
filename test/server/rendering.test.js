@@ -375,7 +375,7 @@ describe("Wafer renders expected content", () => {
                 const child = new ServerElement("h1");
                 child.textContent = value;
                 el.innerHTML = "";
-                el.appendChild(child._element);
+                el.appendChild(child);
               },
             },
           ],
@@ -414,7 +414,7 @@ describe("Wafer renders expected content", () => {
                 const child = new ServerElement("h1");
                 child.textContent = value;
                 el.innerHTML = "";
-                el.appendChild(child._element);
+                el.appendChild(child);
               },
             },
           ],
@@ -623,5 +623,42 @@ describe("Wafer renders expected content", () => {
 
     const el = html.querySelector("wafer-test");
     expect(el.title).to.equal("foo");
+  });
+
+  it("should escape attribute values and textContent", async () => {
+    class Test extends Wafer {
+      static props = {
+        title: {
+          type: String,
+          initial: "fo>o",
+          targets: [
+            {
+              selector: "$span",
+              text: true,
+              attribute: "test2",
+            },
+          ],
+        },
+      };
+
+      static get template() {
+        return "<span></span>";
+      }
+    }
+
+    const html = await parse(
+      `
+      <wafer-test></wafer-test>
+      `,
+      { "wafer-test": { def: Test } }
+    );
+
+    expect(html.toString()).html.to.equal(
+      `
+      <wafer-test title="fo&gt;o" wafer-ssr>
+        <template shadowroot="open"><span test2="fo&gt;o">fo&gt;o</span></template>
+      </wafer-test>
+      `
+    );
   });
 });

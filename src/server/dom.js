@@ -11,7 +11,7 @@ import { updateTargets } from "../common.js";
  * Utility to render a series of items as Elements into a container
  *
  * @param {Object} opts - Repeat options
- * @param {import("node-html-parser").HTMLElement} opts.container - Container into which to render repeated items
+ * @param {ServerElement} opts.container - Container into which to render repeated items
  * @param {any[]} opts.items - Array of items which are used to create/update elements
  * @param {string} opts.html - HTML template which will be used to create elements
  * @param {((value: any, index: number) => string)} opts.keyFn - Key function which is used to create unique id for each item/element
@@ -69,11 +69,7 @@ const repeat = async ({
     /**
      * Add element into container
      */
-    container.appendChild(
-      /** @type {import("node-html-parser").Node} **/ (
-        /** @type {unknown} **/ (el._element)
-      )
-    );
+    container.appendChild(el);
   }
 };
 

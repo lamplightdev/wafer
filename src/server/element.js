@@ -10,6 +10,24 @@ const require = createRequire(import.meta.url);
 const { parse, HTMLElement } = require("node-html-parser");
 
 /**
+ * Escape values for attributes and text content
+ * @param {any} unsafe
+ * @returns {any}
+ */
+const escape = (unsafe) => {
+  if (typeof unsafe !== "string") {
+    return unsafe;
+  }
+
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
+/**
  * Provides an interface compatible with the browser `HTMLElement` - at least
  * in so much as it provides the capabilities Wafer requires. The actual
  * implementation is proxied to node-html-parser implementation of
@@ -82,17 +100,26 @@ class ServerElement {
    * @returns
    */
   setAttribute(key, value) {
-    this._element.setAttribute(key, value);
+    this._element.setAttribute(key, escape(value));
   }
 
   /**
    * Sets all attributes at once
    *
-   * @param {object} attrs - Value to set
+   * @param {Object.<string, string>} attrs - Value to set
    * @returns
    */
   setAttributes(attrs) {
-    this._element.setAttributes(attrs);
+    /**
+     * @type {Object.<string, string>}
+     */
+    const escaped = {};
+
+    for (const [name, value] of Object.entries(attrs)) {
+      escaped[name] = escape(value);
+    }
+
+    this._element.setAttributes(escaped);
   }
 
   /**
@@ -184,6 +211,15 @@ class ServerElement {
    *
    * @returns {ServerElement}
    */
+  set parentNode(node) {
+    this._element.parentNode = node;
+  }
+
+  /**
+   *  The parent of this element
+   *
+   * @returns {ServerElement}
+   */
   get parentNode() {
     return this._element.parentNode;
   }
@@ -213,7 +249,7 @@ class ServerElement {
    * @param {string} content
    */
   set textContent(content) {
-    this._element.textContent = content;
+    this._element.textContent = escape(content);
   }
 
   /**
