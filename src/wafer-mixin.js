@@ -658,9 +658,10 @@ export const WaferMixin = (superclass) =>
              */
             this._updatePromise = null;
 
+            let isFirstUpdate = false;
             if (this._firstUpdate) {
+              isFirstUpdate = true;
               this._firstUpdate = false;
-              await this.firstUpdated(updated);
             }
 
             /**
@@ -670,6 +671,10 @@ export const WaferMixin = (superclass) =>
              * changes have been processed
              */
             await this.updated(updated);
+
+            if (isFirstUpdate) {
+              await this.firstUpdated(updated);
+            }
           } else {
             /**
              * Indicate the current updates have all been processed, and
