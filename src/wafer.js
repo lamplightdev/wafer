@@ -42,6 +42,14 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
     super();
 
     /**
+     * If the component is being rendered on the server, but not
+     * using WaferServer then unreflected attributes should not be removed
+     */
+    super._removeUnreflectedAttributes = !(
+      /** @type {typeof WaferClient} */ (this.constructor).isSSR
+    );
+
+    /**
      * If we want to use the ShadowDOM (else use LightDOM)
      */
     if (shadow) {
