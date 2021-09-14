@@ -24,7 +24,7 @@ const updateTargets = async (apply, el, { value, targets = [] }) => {
      * Apply selector function, or use value directly
      */
     const selectorVal =
-      typeof selector === "function" ? selector(value) : selector;
+      typeof selector === "function" ? selector(value, el) : selector;
 
     /**
      * Find all matches for `selector` in `el`, and apply updates
