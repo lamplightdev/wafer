@@ -698,14 +698,6 @@ export const WaferMixin = (superclass) =>
 
             if (isFirstUpdate) {
               await this.firstUpdated(updated);
-
-              if (isSSR) {
-                /**
-                 * Set the Wafer ssr attribute to indicate the element
-                 * should be rehydrated on the client
-                 */
-                this.setAttribute("wafer-ssr", "");
-              }
             }
           } else {
             /**
@@ -714,6 +706,15 @@ export const WaferMixin = (superclass) =>
              */
             this._updatePromise = null;
             this._firstUpdate = false;
+          }
+
+          if (isSSR) {
+            /**
+             * TODO: I think this can come at the end of this function (i.e. after else statement below) to cover all cases??/
+             * Set the Wafer ssr attribute to indicate the element
+             * should be rehydrated on the client
+             */
+            this.setAttribute("wafer-ssr", "");
           }
         });
     }
