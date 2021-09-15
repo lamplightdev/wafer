@@ -710,11 +710,17 @@ export const WaferMixin = (superclass) =>
 
           if (isSSR) {
             /**
-             * TODO: I think this can come at the end of this function (i.e. after else statement below) to cover all cases??/
              * Set the Wafer ssr attribute to indicate the element
              * should be rehydrated on the client
              */
             this.setAttribute("wafer-ssr", "");
+          }
+
+          /**
+           * If more props have been changed since the update, run again
+           */
+          if (this._toUpdate.size) {
+            this.update(null);
           }
         });
     }
