@@ -294,6 +294,21 @@ const repeat = ({
       }
 
       /**
+       * Get a reference to the element after the one to be inserted.
+       * If there isn't one then the element will be inserted at the end
+       */
+      const afterIndex = index + 1;
+      const elAfter =
+        keyMap[indexToKey[afterIndex]] && keyMap[indexToKey[afterIndex]].el;
+      container.insertBefore(el, elAfter || null);
+
+      /**
+       * Update the keyMap with the new element reference so it's available
+       * for the next element that's going to be inserted
+       */
+      keyMap[indexToKey[index]].el = el;
+
+      /**
        * Update the element with desired target updates, and add the wafer-key
        * attribute for use later
        */
@@ -318,21 +333,6 @@ const repeat = ({
           bindEvent(el, selector, name, def);
         }
       }
-
-      /**
-       * Get a reference to the element after the one to be inserted.
-       * If there isn't one then the element will be inserted at the end
-       */
-      const afterIndex = index + 1;
-      const elAfter =
-        keyMap[indexToKey[afterIndex]] && keyMap[indexToKey[afterIndex]].el;
-      container.insertBefore(el, elAfter || null);
-
-      /**
-       * Update the keyMap with the new element reference so it's available
-       * for the next element that's going to be inserted
-       */
-      keyMap[indexToKey[index]].el = el;
     }
   }
 };
