@@ -95,7 +95,7 @@ const emit = (
  * @param { Object.<string, import("./types").TargetEvents>} [opts.events] - list of events to bind to element when created
  *
  */
-const repeat = ({
+const repeat = async ({
   container,
   items,
   html,
@@ -215,7 +215,7 @@ const repeat = ({
       /**
        * Apply updates to existing elements
        */
-      updateTargets(apply, existingEls[key], {
+      await updateTargets(apply, existingEls[key], {
         value: item,
         targets,
       });
@@ -294,25 +294,10 @@ const repeat = ({
       }
 
       /**
-       * Get a reference to the element after the one to be inserted.
-       * If there isn't one then the element will be inserted at the end
-       */
-      const afterIndex = index + 1;
-      const elAfter =
-        keyMap[indexToKey[afterIndex]] && keyMap[indexToKey[afterIndex]].el;
-      container.insertBefore(el, elAfter || null);
-
-      /**
-       * Update the keyMap with the new element reference so it's available
-       * for the next element that's going to be inserted
-       */
-      keyMap[indexToKey[index]].el = el;
-
-      /**
        * Update the element with desired target updates, and add the wafer-key
        * attribute for use later
        */
-      updateTargets(apply, el, {
+      await updateTargets(apply, el, {
         value: item,
         targets: targets.concat({
           selector: "self",
@@ -333,6 +318,21 @@ const repeat = ({
           bindEvent(el, selector, name, def);
         }
       }
+
+      /**
+       * Get a reference to the element after the one to be inserted.
+       * If there isn't one then the element will be inserted at the end
+       */
+      const afterIndex = index + 1;
+      const elAfter =
+        keyMap[indexToKey[afterIndex]] && keyMap[indexToKey[afterIndex]].el;
+      container.insertBefore(el, elAfter || null);
+
+      /**
+       * Update the keyMap with the new element reference so it's available
+       * for the next element that's going to be inserted
+       */
+      keyMap[indexToKey[index]].el = el;
     }
   }
 };
@@ -345,12 +345,12 @@ const repeat = ({
  * @param {string} selector - CSS3 selector
  * @param {(el: Element) => void} func - function to run on all matches
  */
-const apply = (el, selector, func) => {
+const apply = async (el, selector, func) => {
   if (selector === "self") {
     /**
      * Special case - 'self' applies function to DOM element itself
      */
-    func(el);
+    await func(el);
   } else {
     /**
      * Special case - the selector should be applied to the
@@ -377,7 +377,7 @@ const apply = (el, selector, func) => {
      * Apply function to all matches
      */
     for (const el of target.querySelectorAll(targetSelector)) {
-      func(el);
+      await func(el);
     }
   }
 };

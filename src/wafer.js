@@ -150,7 +150,7 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
    * @param {string} name
    */
   updateTargets(name) {
-    updateTargets(apply, this, {
+    return updateTargets(apply, this, {
       value: this._props[name],
       targets: this.props[name].targets,
     });

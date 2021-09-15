@@ -287,7 +287,7 @@ class Knobs extends Wafer {
                 };
               }
 
-              repeat({
+              return repeat({
                 container: elWafer,
                 items: props,
                 html: html`

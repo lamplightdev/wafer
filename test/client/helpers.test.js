@@ -102,7 +102,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$div",
               dom: (targetEl, items, el) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<span></span>",
@@ -147,7 +147,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$div",
               dom: (targetEl, items, el) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<span></span>",
@@ -203,7 +203,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$div",
               dom: (targetEl, items, el) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<span></span>",
@@ -278,7 +278,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$div",
               dom: (targetEl, items, el) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<span></span>",
@@ -340,7 +340,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$div",
               dom: (targetEl, items, el) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<div><span></span><button>click me</button></div>",
@@ -397,7 +397,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$:scope>div",
               dom: (targetEl, items, self) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<div><span></span></div>",
@@ -461,7 +461,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$div",
               dom: (targetEl, items, el) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<span></span>",
@@ -532,7 +532,7 @@ describe("Wafer DOM", () => {
             {
               selector: "$div",
               dom: (targetEl, items, el) => {
-                repeat({
+                return repeat({
                   container: targetEl,
                   items,
                   html: "<span></span>",
