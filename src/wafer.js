@@ -42,14 +42,6 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
     super();
 
     /**
-     * If the component is being rendered on the server, but not
-     * using WaferServer then unreflected attributes should not be removed
-     */
-    super._removeUnreflectedAttributes = !(
-      /** @type {typeof WaferClient} */ (this.constructor).isSSR
-    );
-
-    /**
      * If we want to use the ShadowDOM (else use LightDOM)
      */
     if (shadow) {
@@ -101,6 +93,12 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
    */
   connectedCallback() {
     if (!this._connectedOnce) {
+      /**
+       * If the component is being rendered on the server, but not
+       * using WaferServer then unreflected attributes should not be removed
+       */
+      super._removeUnreflectedAttributes = !this.hasAttribute("x-ssr");
+
       /**
        * Initialise the component
        */

@@ -521,8 +521,6 @@ describe("Wafer behaviour on instantiation", () => {
   });
 
   it(`should reflect un-reflected property to attribute when SSRd outside Wafer SSR (otherwise prop info lost on rehydration)`, async () => {
-    Wafer.isSSR = true;
-
     class Test extends Wafer {
       static props = {
         test: {
@@ -537,12 +535,14 @@ describe("Wafer behaviour on instantiation", () => {
     /**
      * @type {Test}
      */
-    const el = await fixture("<wafer-test-13 test='bar'></wafer-test-13>");
+    const el = await fixture(
+      "<wafer-test-13 x-ssr test='bar'></wafer-test-13>"
+    );
 
     await el.updateDone();
 
     expect(el).attr("test").to.equal("bar");
     expect(el.test).to.deep.equal("bar");
-    expect(el).attr("wafer-ssr").to.equal("");
+    expect(el).attr("x-ssr").to.equal("");
   });
 });

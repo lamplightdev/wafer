@@ -3,11 +3,6 @@
  * @module WaferMixin
  */
 
-/*
- * Is Wafer being rendered on the server, but not using WaferServer
- */
-let isSSR = false;
-
 /**
  *
  * Mixin providing common functionality for controlling prop/attr relationships
@@ -56,25 +51,6 @@ export const WaferMixin = (superclass) =>
      */
     get props() {
       return /** @type {typeof Wafer} */ (this.constructor).props;
-    }
-
-    /**
-     * Set flag indicating Wafer is being used on the server
-     * (but not using WaferServer)
-     *
-     * @param {boolean} ssr
-     * @returns {void}
-     */
-    static set isSSR(ssr) {
-      isSSR = ssr;
-    }
-
-    /**
-     * Flag indicating Wafer is being used on the server
-     * (but not using WaferServer)
-     */
-    static get isSSR() {
-      return isSSR;
     }
 
     /**
@@ -706,14 +682,6 @@ export const WaferMixin = (superclass) =>
              */
             this._updatePromise = null;
             this._firstUpdate = false;
-          }
-
-          if (isSSR) {
-            /**
-             * Set the Wafer ssr attribute to indicate the element
-             * should be rehydrated on the client
-             */
-            this.setAttribute("wafer-ssr", "");
           }
 
           /**
