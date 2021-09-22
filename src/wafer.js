@@ -8,6 +8,8 @@ import { WaferMixin } from "./wafer-mixin.js";
 import { stamp, apply, bindEvent } from "./dom.js";
 import { updateTargets } from "./common.js";
 
+let isSSR = false;
+
 export default class WaferClient extends WaferMixin(HTMLElement) {
   /**
    * Does the current client context support Declarative Shadow DOM
@@ -17,6 +19,14 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
   static get supportsDSD() {
     // eslint-disable-next-line no-prototype-builtins
     return HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot");
+  }
+
+  static set isSSR(ssr) {
+    isSSR = ssr;
+  }
+
+  static get isSSR() {
+    return isSSR;
   }
 
   /**
@@ -97,7 +107,9 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
        * If the component is being rendered on the server, but not
        * using WaferServer then unreflected attributes should not be removed
        */
-      super._removeUnreflectedAttributes = !this.hasAttribute("x-ssr");
+      super._removeUnreflectedAttributes =
+        !this.hasAttribute("x-ssr") ||
+        !(/** @type {typeof WaferClient} */ (this.constructor).isSSR);
 
       /**
        * Initialise the component

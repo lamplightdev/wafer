@@ -530,6 +530,8 @@ describe("Wafer behaviour on instantiation", () => {
       };
     }
 
+    Wafer.isSSR = true;
+
     customElements.define(`wafer-test-13`, Test);
 
     /**
