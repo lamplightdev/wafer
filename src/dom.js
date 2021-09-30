@@ -220,6 +220,22 @@ const repeat = async ({
         targets,
       });
 
+      /**
+       * Attach event listeners since the existing elements may have been
+       * rendered on the server but won't have event listeners attached yet.
+       * Adding the same bound listener multiple times is a no-op
+       * TODO: think of a way to only do this if necessary
+       */
+      for (const selector of Object.keys(events)) {
+        const eventNames = Object.keys(events[selector]);
+
+        for (const name of eventNames) {
+          const def = events[selector][name];
+
+          bindEvent(existingEls[key], selector, name, def);
+        }
+      }
+
       if (targetIndex !== currentIndex) {
         /**
          * If the element has a new position, calculate the distance it has to
@@ -314,7 +330,6 @@ const repeat = async ({
 
         for (const name of eventNames) {
           const def = events[selector][name];
-
           bindEvent(el, selector, name, def);
         }
       }
