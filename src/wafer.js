@@ -21,12 +21,11 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
     return HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot");
   }
 
+  /**
+   * @param {boolean} ssr
+   */
   static set isSSR(ssr) {
     isSSR = ssr;
-  }
-
-  static get isSSR() {
-    return isSSR;
   }
 
   /**
@@ -50,7 +49,14 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
    */
   constructor({ shadow = "open" } = {}) {
     super();
+    this.init(shadow);
+  }
 
+  /**
+   *
+   * @param {import("./types").ShadowOpts} shadow
+   */
+  init(shadow) {
     /**
      * If we want to use the ShadowDOM (else use LightDOM)
      */
@@ -108,8 +114,11 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
        * using WaferServer then unreflected attributes should not be removed
        */
       super._removeUnreflectedAttributes =
-        !this.hasAttribute("x-ssr") ||
-        !(/** @type {typeof WaferClient} */ (this.constructor).isSSR);
+        !this.hasAttribute("x-ssr") || !isSSR;
+
+      if (!this.hasAttribute("x-ssr") && isSSR) {
+        this.setAttribute("wafer-ssr", "");
+      }
 
       /**
        * Initialise the component
@@ -151,7 +160,7 @@ export default class WaferClient extends WaferMixin(HTMLElement) {
    * @type {boolean}
    */
   get _needsRehydrating() {
-    return this._firstUpdate && this.hasAttribute("wafer-ssr");
+    return this._firstUpdate && this.hasAttribute("wafer-ssr") && !isSSR;
   }
 
   /**
