@@ -145,9 +145,16 @@ const repeat = async ({
    */
   const toRemove = [];
 
-  for (const el of container.querySelectorAll(":scope> *[wafer-key]")) {
+  /**
+   * All the keys of existing elements in DOM order
+   */
+  const childrenKeys = [];
+
+  for (const el of container.children) {
     const key = el.getAttribute("wafer-key");
     if (key) {
+      childrenKeys.push(key);
+
       /**
        * For each element in the container that has a key, keep a record of
        * this element
@@ -194,13 +201,6 @@ const repeat = async ({
    * @type {ElInfo[]}
    */
   const elementsToMove = [];
-
-  /**
-   * All the keys of existing elements in DOM order
-   */
-  const childrenKeys = [...container.children].map((child) =>
-    child.getAttribute("wafer-key")
-  );
 
   /**
    * A counter indicating the new index position
